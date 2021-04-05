@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "676924768161",
+    "firebase_url": "https://udemy-postit.firebaseio.com",
+    "project_id": "udemy-postit",
+    "storage_bucket": "udemy-postit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676924768161:android:76aa16aac59bcb18bc15e0",
+        "android_client_info": {
+          "package_name": "com.paulbarrionuevo.postit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676924768161-7t4t2vp0mtmonron38po7r19pulq8e6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paulbarrionuevo.postit",
+            "certificate_hash": "25ab68e3fb0c56503146dce060067cf6b74621c0"
+          }
+        },
+        {
+          "client_id": "676924768161-n0iliv73n6ocm9111ghh4m5ea1hp8tl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Dl-YBaRoUTtGDht7VoMz3KMwoN6lDlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676924768161-n0iliv73n6ocm9111ghh4m5ea1hp8tl7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "676924768161-01kqnjll3s6rsp6ifknenoll61rnpkv8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paulbarrionuevo.postit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
