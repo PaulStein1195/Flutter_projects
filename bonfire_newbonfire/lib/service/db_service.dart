@@ -1,4 +1,3 @@
-
 import 'package:bonfire_newbonfire/model/comment.dart';
 import 'package:bonfire_newbonfire/model/question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,8 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
 
 import 'navigation_service.dart';
-
-final GoogleSignIn googleSignIn = GoogleSignIn();
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -30,13 +27,13 @@ class DBService {
   String _surveyCollection = "Survey";
 
   Future<void> createPostInDB(
-      String _uid,
-      String _postId,
-      String _image,
-      String _title,
-      String _description,
-      String _mediaUrl,
-      ) async {
+    String _uid,
+    String _postId,
+    String _image,
+    String _title,
+    String _description,
+    String _mediaUrl,
+  ) async {
     try {
       return await _db
           .collection(_postsCollection)
@@ -69,7 +66,7 @@ class DBService {
           .document(_postId)
           .get()
           .then(
-            (doc) {
+        (doc) {
           if (doc.exists) {
             doc.reference.delete();
           }
@@ -79,7 +76,6 @@ class DBService {
       print(e);
     }
   }
-
 
   Future<FirebaseUser> handleSignIn() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -99,24 +95,82 @@ class DBService {
         "lastSeen": DateTime.now().toUtc(),
       });
       NavigationService.instance.navigateToReplacement("home");
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
-
   }
 
-  Future<void> createUserInDB(String _uid, String _name, String _email,
-      String _bio) async {
+  Future<void> createUserInDB(
+      String _uid, String _name, String _email, String _bio) async {
     try {
       return await _db.collection(_userCollection).document(_uid).setData({
         "name": _name,
         "email": _email,
+        "profileImage": "",
         "bio": _bio,
         "lastSeen": DateTime.now().toUtc(),
       });
     } catch (error) {
       print(error);
     }
+  }
+
+  Future<void> createUserGoogle(User user) async {
+    try {
+      return await _db.collection("Users").document(user.uid).setData({
+        'name': user.name,
+        'email': user.email,
+        "profileImage": user.profileImage,
+        "bio": "",
+        'lastSeen': Timestamp.now(),
+      });
+    } catch(e) {
+      print(e);
+    }
+  }
+
+  Future<void> createBonfire(String bonfire, String uid, String bfColl,
+      String bf_id, List<String> bonfires) async {
+    return await _db
+        .collection(bonfire)
+        .document(uid)
+        .collection(bfColl)
+        .document(bf_id)
+        .setData(
+      {"bonfire": bonfires},
+    );
+  }
+
+  Stream<List<User>> getUsersInDB() {
+    var _ref = _db.collection("Users");
+    return _ref.getDocuments().asStream().map((_snapshot) {
+      return _snapshot.documents.map((_doc) {
+        return User.fromDocument(_doc);
+      }).toList();
+    });
+  }
+
+  Stream<List<Post>> getPostsInDB() {
+    var _ref = _db.collection("Posts").document().collection("usersPosts");
+    return _ref.getDocuments().asStream().map((_snapshot) {
+      return _snapshot.documents.map((_doc) {
+        return Post.fromFirestore(_doc);
+      }).toList();
+    });
+  }
+
+
+  Stream<List<Post>> getMyPosts(String _userID) {
+    var _ref = _db
+        .collection(_postsCollection)
+        .document(_userID)
+        .collection("userPosts")
+        .orderBy("timestamp", descending: true);
+    return _ref.snapshots().map((_snapshot) {
+      return _snapshot.documents.map((_doc) {
+        return Post.fromFirestore(_doc);
+      }).toList();
+    });
   }
 
   Future<void> addComment(String _uid, String _comntId, String _postId,
@@ -182,18 +236,6 @@ class DBService {
     });
   }
 
-  Stream<List<Post>> getPostsInDB(String _userID) {
-    var _ref = _db
-        .collection(_postsCollection)
-        .document(_userID)
-        .collection("userPosts")
-        .orderBy("timestamp", descending: true);
-    return _ref.snapshots().map((_snapshot) {
-      return _snapshot.documents.map((_doc) {
-        return Post.fromFirestore(_doc);
-      }).toList();
-    });
-  }
 
   Stream<List<Comment>> getComments(String _postID) {
     var _ref = _db
@@ -207,7 +249,7 @@ class DBService {
       }).toList();
     });
   }
-  /*Stream<List<Bonfire>> getBonfires(String _bfId, String _bonfire) {
+/*Stream<List<Bonfire>> getBonfires(String _bfId, String _bonfire) {
     var _ref = _db
         .collection("Bonfires")
         .document(_bfId)

@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:bonfire_newbonfire/screens/user_access/widgets/amber_btn_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/service/navigation_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmailVerification extends StatefulWidget {
   @override
@@ -87,6 +89,12 @@ class _EmailVerificationState extends State<EmailVerification> {
                     fontWeight: FontWeight.w400),
                 textAlign: TextAlign.center,
               ),
+              SizedBox(height: 25.0,),
+              Amber_Btn_Widget(
+                context: context,
+                text: "GO TO GMAIL",
+                onPressed: _launchURL,
+              ),
               /*SpinKitDoubleBounce(
                 color: Theme.of(context).accentColor,
                 size: 60.0,
@@ -96,5 +104,13 @@ class _EmailVerificationState extends State<EmailVerification> {
         ),
       ),
     );
+  }
+  _launchURL() async {
+    const url = 'https://mail.google.com/mail/u/0/?tab=mm#inbox';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

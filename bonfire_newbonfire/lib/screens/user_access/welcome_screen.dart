@@ -15,9 +15,9 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   bool isAuth = false;
 
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       tag: "logo",
                       child: Container(
                         height: 170.0,
-                        width: 175,
+                        width: 180,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/images/logo_shadow.png'),
@@ -84,8 +84,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: OutlineButton(
                     splashColor: Theme.of(context).accentColor,
-                    onPressed: () async {
-                      DBService.instance.handleSignIn();
+                    onPressed: () {
+                      _auth.signUpGoogle();
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),

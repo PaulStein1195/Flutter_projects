@@ -41,7 +41,7 @@ class _WHWidgetState extends State<WHWidget> {
         _auth = Provider.of<AuthProvider>(_context);
         return Container(
           child: StreamBuilder<List<Post>>(
-            stream: DBService.instance.getPostsInDB(_auth.user.uid),
+            stream: DBService.instance.getPostsInDB(),
             builder: (_context, _snapshot) {
               var _data = _snapshot.data;
               print(_snapshot.data);
@@ -78,7 +78,7 @@ class _WHWidgetState extends State<WHWidget> {
                                   leading: CircleAvatar(
                                     backgroundColor: Colors.grey,
                                     backgroundImage: NetworkImage(user
-                                        .image), //"https://picsum.photos/250?image=11"
+                                        .profileImage), //"https://picsum.photos/250?image=11"
                                   ),
                                   title: Text(user.name),
                                   subtitle: _listTileTrailingWidgets(

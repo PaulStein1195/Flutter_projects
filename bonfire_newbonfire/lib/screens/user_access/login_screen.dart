@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
             text: "LOG IN",
             onPressed: () {
               if (_formKey.currentState.validate()) {
-                _auth.loginUserWithEmailAndPassword(_email, _password);
+                _auth.loginUserWithEmailAndPassword(_email, _password, context);
               }
             },
           );

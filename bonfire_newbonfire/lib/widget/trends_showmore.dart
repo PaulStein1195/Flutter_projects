@@ -1,4 +1,5 @@
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
+import 'package:bonfire_newbonfire/test/meeting_screen.dart';
 import 'package:flutter/material.dart';
 
 class Trends_Detailed extends StatelessWidget {
@@ -131,7 +132,13 @@ class Trends_Detailed extends StatelessWidget {
                           ),
                           child: MaterialButton(
                             elevation: 5.0,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          MeetingScreen()));
+                            },
                             child: Text(
                               "JOIN",
                               style: TextStyle(

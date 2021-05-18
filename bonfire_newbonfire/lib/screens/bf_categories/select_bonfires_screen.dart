@@ -36,51 +36,51 @@ class FirstSuggestionScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Avatar_Widget(context, text: nature, icon: MyFlutterApp.earth,
+                Avatar_Widget(context, color1: Colors.lightGreenAccent, color2: Colors.lightGreen.shade600, text: nature, icon: MyFlutterApp.earth,
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return BF_Nature(
-                          bonfire: nature,
-                        );
-                      },
-                    ),
-                  );
-                }),
-                Avatar_Widget(context, text: tech, icon: MyFlutterApp.globe,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return Nature(
+                              bonfire: nature,
+                            );
+                          },
+                        ),
+                      );
+                    }),
+                Avatar_Widget(context, color1: Colors.lightBlueAccent, color2: Colors.blueAccent, text: tech, icon: MyFlutterApp.globe,
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return BF_Technology(
-                          bonfire: tech,
-                        );
-                      },
-                    ),
-                  );
-                }),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return Technology(
+                              bonfire: tech,
+                            );
+                          },
+                        ),
+                      );
+                    }),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Avatar_Widget(context, text: health, icon: MyFlutterApp.users,
+                Avatar_Widget(context, color1: Colors.amber, color2: Colors.orange.shade600, text: health, icon: MyFlutterApp.users,
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return BF_Health(
-                          bonfire: health,
-                        );
-                      },
-                    ),
-                  );
-                }),
-                Avatar_Widget(context, text: education, icon: MyFlutterApp.book,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return Health(
+                              bonfire: health,
+                            );
+                          },
+                        ),
+                      );
+                    }),
+                /*Avatar_Widget(context, text: education, icon: MyFlutterApp.book,
                     onTap: () {
                   Navigator.push(
                     context,
@@ -92,13 +92,13 @@ class FirstSuggestionScreen extends StatelessWidget {
                       },
                     ),
                   );
-                }),
+                }),*/
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Avatar_Widget(
+                /*Avatar_Widget(
                   context,
                   text: arts,
                   icon: MyFlutterApp.brush_1,
@@ -114,19 +114,7 @@ class FirstSuggestionScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
-                Avatar_Widget(context, text: other, icon: Icons.add, onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return Bonfire_Categories_Screen(
-                          bonfire: other,
-                        );
-                      },
-                    ),
-                  );
-                }),
+                ),*/
               ],
             ),
           ],

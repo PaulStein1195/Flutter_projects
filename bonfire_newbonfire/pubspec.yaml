@@ -30,6 +30,7 @@ dependencies:
   cloud_firestore: "0.13.4+2"
   #GOOGLE SIGN IN
   google_sign_in: ^4.4.4
+  url_launcher:
 
   #OTHERS
   flutter_spinkit: ^4.1.2
@@ -41,6 +42,8 @@ dependencies:
   timeago: ^2.0.26
   uuid: ^2.0.1
   share: ^0.6.2+3
+  permission_handler:
+  agora_rtc_engine:
 
 
 dev_dependencies:

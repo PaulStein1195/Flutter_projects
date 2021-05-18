@@ -16,11 +16,11 @@ class Onboard1 extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: [
-                  Image_Logo('assets/images/Green-Flame.png'),
+                  Image_Logo('assets/images/Logo.png'),
                   SizedBox(
                     height: 20.0,
                   ),
-                  Headline1('Welcome to Bonfire!', Colors.greenAccent),
+                  Headline1('Welcome to Bonfire!', Colors.white),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -197,7 +197,7 @@ Widget Image_Logo(String asset_image) {
     tag: "logo",
     child: Container(
       height: 160.0,
-      width: 135.0,
+      width: 180.0,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(asset_image),
@@ -222,6 +222,6 @@ Widget Headline2(String text) {
     text,
     textAlign: TextAlign.center,
     style: TextStyle(
-        fontSize: 24.0, fontWeight: FontWeight.w400, color: Colors.white),
+        fontSize: 24.0, fontWeight: FontWeight.w400, color: Colors.white70),
   );
 }

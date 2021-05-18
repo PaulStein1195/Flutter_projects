@@ -1,3 +1,4 @@
+import 'package:bonfire_newbonfire/screens/all_users_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   );
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
+    AllUsers(),
     ProfileScreen(),
     //Profile()
   ];
@@ -42,10 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color.fromRGBO(41, 39, 40, 210.0),
         //Color.fromRGBO(108, 181, 217, 1),
         items: const <BottomNavigationBarItem>[
-          /*BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(MyFlutterApp.home),
             title: Text('Home'),
-          ),*/
+          ),
           BottomNavigationBarItem(
             icon: Icon(MyFlutterApp.fire),
             title: Text('Bonfires'),

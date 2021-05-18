@@ -191,7 +191,7 @@ class _QuestionState extends State<Question> {
                                     leading: CircleAvatar(
                                       radius: 30.0,
                                       backgroundColor: Colors.grey,
-                                      backgroundImage: NetworkImage(_data.image),
+                                      backgroundImage: NetworkImage(_data.profileImage),
                                     ),
                                     title: Text(
                                       _data.name,

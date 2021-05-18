@@ -439,18 +439,21 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         isUploadingPost = true;
                       });
                       String _mediaUrl = await uploadImage(file);
-
-                      DBService.instance.createPostInDB(_auth.user.uid, _postId,
-                          _image, _title, _description, _mediaUrl);
-                      titleController.clear();
-                      descriptionController.clear();
-                      setState(() {
-                        _postId = Uuid().v4();
-                      });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => HomeScreen()));
+                      if(_mediaUrl == null){
+                        _mediaUrl = "";
+                      } else {
+                        DBService.instance.createPostInDB(_auth.user.uid, _postId,
+                            _image, _title, _description, _mediaUrl);
+                        titleController.clear();
+                        descriptionController.clear();
+                        setState(() {
+                          _postId = Uuid().v4();
+                        });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => HomeScreen()));
+                      }
                     },
             ),
     );

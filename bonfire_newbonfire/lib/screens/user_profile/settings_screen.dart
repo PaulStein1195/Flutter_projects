@@ -17,10 +17,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
-      appBar: kAppbar(context),
+      backgroundColor: Color.fromRGBO(41, 39, 40, 150.0),
+      appBar: AppBar(
+        elevation: 1.0,
+        title: Text("Settings"),
+        centerTitle: true,
+      ),
       body: ChangeNotifierProvider<AuthProvider>.value(
-
         value: AuthProvider.instance,
         child: Builder(
           builder: (BuildContext context) {
@@ -44,29 +47,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          child: Material(
-                            color: Color(0XFFffb21a),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                            child: MaterialButton(
-                              elevation: 5.0,
-                              onPressed: () {
-                                _auth.logoutUser(() {});
-                              },
-                              child: Text(
-                                "LOG OUT",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15.0),
-                              ),
+                        GestureDetector(
+                          onTap: () {
+                            _auth.logoutUser(() {});
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.exit_to_app,
+                                    size: 25.0,
+                                    color: Colors.white70 //kBottomNavigationBar,
+                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    "LOG OUT",
+                                    style: TextStyle(
+                                        fontSize: 16.5, color: Colors.white),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
+                        Divider(color: Colors.blueGrey,),
                       ],
                     ),
                   ),

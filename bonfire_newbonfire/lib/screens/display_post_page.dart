@@ -1,10 +1,10 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/model/question.dart';
 import 'package:bonfire_newbonfire/screens/bonfire_screen.dart';
-import 'package:bonfire_newbonfire/screens/new_user/widgets/start_categories.dart';
 import 'package:bonfire_newbonfire/screens/user_access/widgets/amber_btn_widget.dart';
 import 'package:bonfire_newbonfire/widget/trends.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -18,7 +18,6 @@ import '../my_flutter_app_icons.dart';
 import '../notifications_screen.dart';
 import 'bf_categories/select_bonfires_screen.dart';
 import 'main_bonfire/WH_screen.dart';
-import 'new_user/main_bf_screen.dart';
 import 'new_user/widgets/scrollable_bf_widget.dart';
 
 final postRef = Firestore.instance.collection("Posts");
@@ -53,6 +52,17 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             actions: [
+              /*IconButton(
+                splashColor: Colors.white70,
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => AllUsers())),
+                icon: Icon(
+                  MyFlutterApp.users,
+                  size: 27.0,
+                ),
+              ),*/
               SizedBox(
                 width: 10.0,
               ),
@@ -90,36 +100,146 @@ class _HomePageState extends State<HomePage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                SizedBox(
+                  height: 5.0,
+                ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "What's Happening",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.grey.shade300,
-                          fontWeight: FontWeight.w600),
-                    ),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 2.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "What's Happening",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.grey.shade300,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      FlatButton(
+                        splashColor: Colors.white70,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      WH_Screen()));
+                        },
+                        child: Text(
+                          "+ Show more",
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                Trends(
+                    trendImage: "https://picsum.photos/250?image=11",
+                    title: "Drones",
+                    description: "Revolution in air transportation?",
+                    time: "02:30 PM",
+                    icon: MyFlutterApp.rss,
+                    iconColor: Colors.greenAccent.shade700),
+                SizedBox(
+                  height: 20.0,
+                ),
+                /*Trends(
+                    trendImage: "https://picsum.photos/250?image=11",
+                    title: "NVIDIA",
+                    score: "Advancing towards autonomous systems",
+                    time: "02:15 PM",
+                    icon: MyFlutterApp.share,
+                    iconColor: Colors.white70),
+                SizedBox(
+                  height: 5.0,
+                ),*/
+                /* Trends(
+                    trendImage: "https://picsum.photos/250?image=11",
+                    title: "COVID-19",
+                    score: "Vaccination, PROS and CONS from Science and experience",
+                    time: "05:00 PM",
+                    icon: MyFlutterApp.share,
+                    iconColor: Colors.white70),*/
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 2.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "You are going",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.grey.shade300,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      FlatButton(
+                        splashColor: Colors.white70,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      WH_Screen()));
+                        },
+                        child: Text(
+                          "+ Show more",
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                /*Trends(
+                  trendImage: "https://picsum.photos/250?image=11",
+                  title: "NVIDIA",
+                  score: "Advancing towards autonomous systems",
+                  time: "02:15 PM",
+                  icon: MyFlutterApp.share,
+                  iconColor: Colors.white70,
+                ),
                 SizedBox(
                   height: 5.0,
                 ),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
+                Trends(
+                    trendImage: "https://picsum.photos/250?image=11",
+                    title: "NVIDIA",
+                    score: "Advancing towards autonomous systems",
+                    time: "02:15 PM",
+                    icon: MyFlutterApp.share,
+                    iconColor: Colors.white70),
+                SizedBox(
+                  height: 5.0,
+                ),*/
+                Trends(
+                    trendImage: "https://picsum.photos/250?image=11",
+                    title: "COVID-19",
+                    description:
+                        "Vaccination, PROS and CONS from Science and experience",
+                    time: "05:00 PM",
+                    icon: MyFlutterApp.share,
+                    iconColor: Colors.white70),
                 SizedBox(
                   height: 5.0,
                 ),
-                FlatButton(
+                /*FlatButton(
                   splashColor: Colors.white70,
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WH_Screen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => WH_Screen()));
                   },
                   child: Text(
                     "+ Show more",
@@ -128,50 +248,11 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 16.0,
                         fontWeight: FontWeight.w700),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "You are going",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.grey.shade300,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
-                Trends("https://picsum.photos/250?image=11", "Technology",
-                    "Create a Start up in SV"),
-                SizedBox(
-                  height: 5.0,
-                ),
-                FlatButton(
-                  splashColor: Colors.white70,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WH_Screen()));
-                  },
-                  child: Text(
-                    "+ Show more",
-                    style: TextStyle(
-                        color: kAmberColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsets.only(left: 7.0),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
                       "Timeline",
                       textAlign: TextAlign.left,
@@ -191,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (BuildContext context) {
                       _auth = Provider.of<AuthProvider>(context);
                       return StreamBuilder<List<Post>>(
-                        stream: DBService.instance.getPostsInDB(_auth.user.uid),
+                        stream: DBService.instance.getMyPosts(_auth.user.uid),
                         builder: (context, _snapshot) {
                           var _data = _snapshot.data;
                           if (!_snapshot.hasData) {
@@ -204,11 +285,53 @@ class _HomePageState extends State<HomePage> {
                           }
                           if (_data.length == 0) {
                             return Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "NOTHING IN YOUR TIMELINE!",
-                                style: TextStyle(
-                                    fontSize: 25.0, color: Colors.white70),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey.shade800
+
+                                    //color: Color(0XFF717171),
+                                  ),
+                                  color: Color.fromRGBO(41, 39, 40, 10.0),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Container(
+                                        height: 100.0,
+                                        width: 100.0,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/start_fire.png")
+                                          )
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "NOTHING IN YOUR TIMELINE!",
+                                      style: TextStyle(
+                                          fontSize: 23.5, color: Colors.grey),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 18.0),
+                                      child: Amber_Btn_Widget(
+                                        context: context,
+                                        text: "START",
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) => FirstSuggestionScreen(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           }
@@ -221,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 5.0,
                 ),
                 ChangeNotifierProvider<AuthProvider>.value(
                   value: AuthProvider.instance,
@@ -288,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "+   See all",
                           style: TextStyle(
-                              color: Theme.of(context).accentColor,
+                              color: Colors.white70,
                               fontWeight: FontWeight.w700,
                               fontSize: 15.0),
                         ),
@@ -297,7 +420,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 2.0,
                 ),
                 Scrollable_BF_Widget(),
               ],
@@ -312,11 +435,16 @@ class _HomePageState extends State<HomePage> {
 class SearchBar extends SearchDelegate<String> {
   @override
   ThemeData appBarTheme(BuildContext context) {
-
     assert(context != null);
     final ThemeData theme = Theme.of(context);
     assert(theme != null);
-    return theme;
+    return theme.copyWith(
+      primaryColor: Colors.white,
+      primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.black87),
+      textTheme: theme.textTheme.copyWith(
+        title: TextStyle(fontWeight: FontWeight.normal),
+      ),
+    );
   }
 
   final bonfires = [

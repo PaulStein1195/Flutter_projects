@@ -111,9 +111,24 @@ class CommentsState extends State<Comments> {
                               "username": _data.name,
                               "comment": commentController.text,
                               "timestamp": Timestamp.now(),
-                              "avatarUrl": _data.image,
-                              "userId": _data.id,
+                              "avatarUrl": _data.profileImage,
+                              "userId": _data.uid,
                             });
+                            bool isNotPostOwner = postOwnerId == _data.uid;
+                            if (isNotPostOwner ){
+                              Firestore.instance.collection("Notifications").document(postOwnerId)
+                                  .collection("notificationsItems")
+                                  .add({
+                                "type": "comment",
+                                "commentData": commentController.text,
+                                "timestamp": Timestamp.now(),
+                                "postId": postId,
+                                "userId": _data.uid,
+                                "username": _data.name,
+                                "userProfileImage": _data.profileImage,
+                                //"mediaUrl": postMediaUrl
+                              });
+                            }
                             commentController.clear();
                           },
                           color: Theme.of(context).accentColor,

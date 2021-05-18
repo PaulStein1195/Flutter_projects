@@ -12,7 +12,14 @@ class _EmailScreenState extends State<EmailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: kAppbar(context),
+        backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Inbox",
+            style: TextStyle(color: Colors.white70),
+          ),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

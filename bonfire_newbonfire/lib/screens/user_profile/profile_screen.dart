@@ -90,35 +90,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Column(
                 children: [
                   _userProfileData(_userData.name, _userData.email,
-                      _userData.image, _userData.bio),
+                      _userData.profileImage, _userData.bio),
                   _userCollectedData(),
                   Divider(color: Colors.white70),
-
-                  /*GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(MyFlutterApp.cog_1,
-                              size: 20.0,
-                              color: Colors.white //kBottomNavigationBar,
-                              ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "Settings",
-                              style: TextStyle(
-                                  fontSize: 16.5, color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/
                 ],
               );
             }
@@ -224,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _userCollectedData() {
     return StreamBuilder<List<Post>>(
-      stream: DBService.instance.getPostsInDB(_auth.user.uid),
+      stream: DBService.instance.getMyPosts(_auth.user.uid),
       builder: (_context, _snapshot) {
         var _userInfoData = _snapshot.data;
         if (!_snapshot.hasData) {

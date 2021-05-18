@@ -68,28 +68,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Hardware",
                           style:
@@ -118,28 +96,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Drones",
                           style:
@@ -168,28 +124,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Mechanics",
                           style:
@@ -218,28 +152,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Software",
                           style:
@@ -268,28 +180,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Software",
                           style:
@@ -318,28 +208,6 @@ class SelectPost extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*Container(
-                          height: 60.0,
-                          width: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                kAmberColor,
-                                Colors.red,
-                              ],
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: AssetImage("assets/images/flame_icon1.png"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 35.0,
-                        ),*/
                         Text(
                           "Software",
                           style:
@@ -360,127 +228,137 @@ class SelectPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFF333333),
+      backgroundColor: Color.fromRGBO(41, 39, 40, 150.0),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
-        title: Text("Add Activity"),
+        title: Text(
+          "Create Activity",
+          style: TextStyle(fontSize: 20.0),
+        ),
         centerTitle: true,
+        elevation: 0.5,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(2.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 111.0,
-                    width: 111.0,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomLeft,
-                        end: Alignment.topRight,
-                        colors: [
-                          Theme.of(context).accentColor,
-                          Colors.orange
-                        ]
-                      ),
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.circular(100.0)
+            Container(
+              width: 500,
+              color: Color.fromRGBO(41, 39, 40, 140.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 25.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Discuss over a topic?",
+                      style: TextStyle(color: Colors.white70, fontSize: 27.0),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
                       child: Container(
                         height: 111.0,
                         width: 111.0,
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/flame_icon1.png")
-                            ),
                             gradient: LinearGradient(
                                 begin: Alignment.bottomLeft,
                                 end: Alignment.topRight,
                                 colors: [
                                   Theme.of(context).accentColor,
                                   Colors.orange
-                                ]
-                            ),
+                                ]),
                             color: Theme.of(context).accentColor,
-                            borderRadius: BorderRadius.circular(100.0)
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Container(
+                            height: 111.0,
+                            width: 111.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/flame_icon1.png")),
+                                gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Theme.of(context).accentColor,
+                                      Colors.orange
+                                    ]),
+                                color: Theme.of(context).accentColor,
+                                borderRadius: BorderRadius.circular(100.0)),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Text(
-                  "DIVULGE",
-                  style: TextStyle(color: Colors.white, fontSize: 23.0),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, "question_type"),
-                child: Container(
-                  height: 111.0,
-                  width: 111.0,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            Theme.of(context).accentColor,
-                            Colors.orange
-                          ]
-                      ),
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.circular(100.0)
-                  ),
-                  child: Icon(Icons.help_outline, size: 70.0, color: Colors.white70,),
-                ),
-                ),
-                Text(
-                  "ASK",
-                  style: TextStyle(color: Colors.white, fontSize: 23.0),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                        backgroundColor: Colors.black87,
-                        context: context,
-                        builder: buildBonfireList);
-                  },
-                  child: Container(
-                    height: 111.0,
-                    width: 111.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                              Theme.of(context).accentColor,
-                              Colors.orange
-                            ]
-                        ),
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.circular(100.0)
+                    Text(
+                      "DIVULGE",
+                      style: TextStyle(color: Colors.white, fontSize: 23.0),
                     ),
-                    child: Icon(MyFlutterApp.pencil, size: 45.0, color: Colors.white70,),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              color: Color.fromRGBO(41, 39, 40, 140.0),
+              child: Column(
+                children: [
+                  Text(
+                    "Share content on the bonfire?",
+                    style: TextStyle(color: Colors.white70, fontSize: 27.0),
                   ),
-                ),
-                Text(
-                  "POST",
-                  style: TextStyle(color: Colors.white, fontSize: 23.0),
-                ),
-              ],
-            )
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 25.0),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    backgroundColor: Colors.black87,
+                                    context: context,
+                                    builder: buildBonfireList);
+                              },
+                              child: Container(
+                                height: 111.0,
+                                width: 111.0,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
+                                        colors: [
+                                          Theme.of(context).accentColor,
+                                          Colors.orange
+                                        ]),
+                                    color: Theme.of(context).accentColor,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Icon(
+                                  MyFlutterApp.pencil,
+                                  size: 45.0,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "POST",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 23.0),
+                            ),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -109,9 +109,9 @@ class _AskScreenState extends State<AskScreen> {
                               if (_formKey.currentState.validate()) {
                                 //TODO: Make question
                                 DBService.instance.createQuestion(
-                                    _data.id,
+                                    _data.uid,
                                     _data.name,
-                                    _data.image,
+                                    _data.profileImage,
                                     _question,
                                     _questionId);
                                 setState(() {

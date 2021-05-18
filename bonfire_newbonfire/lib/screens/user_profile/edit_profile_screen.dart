@@ -120,7 +120,31 @@ class _EditProfileState extends State<EditProfile> {
                           Container(
                             child: Column(
                               children: <Widget>[
+                                SizedBox(height: 25.0,),
                                 Container(
+                                  height: 100.0,
+                                  width: 100.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white70, width: 2.0),
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    //color: Color.fromRGBO(41, 39, 40, 150.0),
+                                    /*gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          kAmberColor,
+                          Colors.red,
+                        ],
+                      ),*/
+                                    /*image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: _image != ""
+                              ? NetworkImage(_image)
+                              : AssetImage("assets/images/flame_icon1.png")),*/
+                                  ),
+                                  child: Center(child: Text(_userData.name[0], style: TextStyle(color: Colors.white70, fontSize: 35.0, fontWeight: FontWeight.w700),)),
+                                ),
+                                /*Container(
                                   height: 100.0,
                                   width: 100.0,
                                   decoration: BoxDecoration(
@@ -138,7 +162,7 @@ class _EditProfileState extends State<EditProfile> {
                                         image: _userData.image != "" ? NetworkImage(_userData.image) : AssetImage("assets/images/flame_icon1.png")
                                     ),
                                   ),
-                                ),
+                                ),*/
                                 Padding(
                                   padding: EdgeInsets.all(16.0),
                                   child: Column(

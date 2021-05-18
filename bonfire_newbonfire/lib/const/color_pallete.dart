@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../my_flutter_app_icons.dart';
 
-const kAppbarColor = Color.fromRGBO(41, 39, 40, 140.0);//Color.fromRGBO(41, 39, 40, 200.0);
+const kAppbarColor = Color.fromRGBO(41, 39, 40, 180.0);//Color.fromRGBO(41, 39, 40, 200.0);
 const kAmberColor = Color(0XFFffb21a);
 
 Widget kAppbar(BuildContext context) {

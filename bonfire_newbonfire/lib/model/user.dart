@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
-  final String id;
-  final String name;
-  final String email;
-  final String bio;
-  final String image;
+  String uid;
+  String name;
+  String email;
+  String bio;
+  String profileImage;
 
-  final Timestamp lastSeen;
+  Timestamp lastSeen;
 
-  User({this.id, this.name, this.email, this.image, this.bio, this.lastSeen});
+  User({this.uid, this.name, this.email, this.profileImage, this.bio, this.lastSeen});
 
   factory User.fromDocument(DocumentSnapshot _snapshot) {
     var _data = _snapshot.data;
     return User(
-      id: _snapshot.documentID,
+      uid: _snapshot.documentID,
       name: _data["name"],
       email: _data["email"],
-      image: _data["image"],
+      profileImage: _data["profileImage"],
       bio: _data["bio"],
       lastSeen: _data["lastSeen"],
     );

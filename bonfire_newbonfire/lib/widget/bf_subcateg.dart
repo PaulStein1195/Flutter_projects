@@ -24,25 +24,23 @@ Widget BF_SubCateg_Widget(
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Hero(
-                  tag: "bf",
-                  child: Container(
-                    decoration: BoxDecoration(
-                      //color: Color(0XFF333333),
-                      borderRadius: BorderRadius.circular(100.0),
-                      /*gradient: LinearGradient(colors: [color1, color2]),*/
-                      /*image: DecorationImage(
+                child: Container(
+                  decoration: BoxDecoration(
+                    //color: Color(0XFF333333),
+                    borderRadius: BorderRadius.circular(100.0),
+                    /*gradient: LinearGradient(colors: [color1, color2]),*/
+                    /*image: DecorationImage(
                                                     image: AssetImage(
                                                         "assets/images/flame_icon1.png")),*/
-                      //Theme.of(context).accentColor,
-                    ),
-                    child: Icon(
-                      icon,
-                      size: 35.0,
-                      color: Color(0XFF333333),//Colors.white70,
-                    ),
+                    //Theme.of(context).accentColor,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 35.0,
+                    color: Color(0XFF333333),//Colors.white70,
                   ),
                 ),
+
               ),
             ),
           ),
