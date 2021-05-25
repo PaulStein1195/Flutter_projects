@@ -43,7 +43,7 @@ dependencies:
   uuid: ^2.0.1
   share: ^0.6.2+3
   permission_handler:
-  agora_rtc_engine:
+  agora_rtc_engine: ^3.3.3
 
 
 dev_dependencies:

@@ -1,5 +1,5 @@
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
-import 'package:bonfire_newbonfire/screens/new_user/widgets/scrollable_bf_widget.dart';
+import 'package:bonfire_newbonfire/widget/scrollable_bf_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

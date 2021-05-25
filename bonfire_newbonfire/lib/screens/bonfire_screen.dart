@@ -1,5 +1,4 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
-import 'package:bonfire_newbonfire/screens/user_access/widgets/amber_btn_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../my_flutter_app_icons.dart';

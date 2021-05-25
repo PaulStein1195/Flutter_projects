@@ -52,6 +52,14 @@
 ///         Author:    Dave Gandy
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
+/// * Modern Pictograms, Copyright (c) 2012 by John Caserta. All rights reserved.
+///         Author:    John Caserta
+///         License:   SIL (http://scripts.sil.org/OFL)
+///         Homepage:  http://thedesignoffice.org/project/modern-pictograms/
+/// * Octicons, Copyright (C) 2020 by GitHub Inc.
+///         Author:    GitHub
+///         License:   MIT (http://opensource.org/licenses/mit-license.php)
+///         Homepage:  https://primer.style/octicons/
 ///
 import 'package:flutter/widgets.dart';
 
@@ -217,8 +225,11 @@ class MyFlutterApp {
   static const IconData thumbs_down_1 = IconData(0xe899, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData mic_1 = IconData(0xe89a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData sound_1 = IconData(0xe89b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData link = IconData(0xe89c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData link_1 = IconData(0xe89d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData campfire = IconData(0xe954, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData candle_fire = IconData(0xe957, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData cat = IconData(0xe95f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData fire_1 = IconData(0xe9c3, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData microphone = IconData(0xea3f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData nuclear = IconData(0xea4d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -226,6 +237,8 @@ class MyFlutterApp {
   static const IconData paper_plane_1 = IconData(0xf01d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData vector = IconData(0xf045, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bicycle = IconData(0xf206, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData twitter_bird = IconData(0xf303, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData primitive_dot = IconData(0xf30c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData playstation = IconData(0xf3df, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData piggy_bank = IconData(0xf4d3, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData seedling = IconData(0xf4d8, fontFamily: _kFontFam, fontPackage: _kFontPkg);

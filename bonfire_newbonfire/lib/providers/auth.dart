@@ -1,5 +1,5 @@
 import 'package:bonfire_newbonfire/model/user.dart';
-import 'package:bonfire_newbonfire/screens/home_screen.dart';
+import 'package:bonfire_newbonfire/home_screen.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

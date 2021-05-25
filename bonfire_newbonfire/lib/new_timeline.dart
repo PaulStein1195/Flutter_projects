@@ -1,5 +1,5 @@
 
-import 'package:bonfire_newbonfire/screens/new_user/widgets/start_categories.dart';
+import 'package:bonfire_newbonfire/widget/start_categories.dart';
 import 'package:bonfire_newbonfire/widget/top3_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

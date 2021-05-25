@@ -316,7 +316,7 @@ class _PostState extends State<Post> {
                       //top: BorderSide(width: 1.5, color: Colors.grey.shade600),
                       //bottom: BorderSide(width: 1.5, color: Colors.grey.shade600),
                     ),
-                    color: Color(0XFF292728),
+                    color: kMainBoxColor,
                   ),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,

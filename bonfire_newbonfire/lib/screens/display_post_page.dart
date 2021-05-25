@@ -1,7 +1,7 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
-import 'package:bonfire_newbonfire/model/question.dart';
+import 'package:bonfire_newbonfire/screens/Floating_create/create_post.dart';
 import 'package:bonfire_newbonfire/screens/bonfire_screen.dart';
-import 'package:bonfire_newbonfire/screens/user_access/widgets/amber_btn_widget.dart';
+import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
 import 'package:bonfire_newbonfire/widget/trends.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,9 +16,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../email_screen.dart';
 import '../my_flutter_app_icons.dart';
 import '../notifications_screen.dart';
-import 'bf_categories/select_bonfires_screen.dart';
-import 'main_bonfire/WH_screen.dart';
-import 'new_user/widgets/scrollable_bf_widget.dart';
+import 'Home/WH_screen.dart';
+import '../widget/scrollable_bf_widget.dart';
 
 final postRef = Firestore.instance.collection("Posts");
 final userRef = Firestore.instance.collection("Users");
@@ -33,401 +32,410 @@ class _HomePageState extends State<HomePage> {
   bool noData = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getActivityFeed();
+  }
+
+  getActivityFeed() async {
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection("FeedItems")
+        .document(_auth.user.uid)
+        .collection("feedItems")
+        .orderBy("timestamp", descending: true)
+        .limit(50)
+        .getDocuments();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: kFloatingAction(context),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
-            expandedHeight: 40.0,
-            elevation: 0.0,
-            leading: IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: SearchBar());
-              },
-              icon: Icon(
-                MyFlutterApp.magnifier,
-                size: 25.0,
-              ),
-            ),
-            actions: [
-              /*IconButton(
-                splashColor: Colors.white70,
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => AllUsers())),
-                icon: Icon(
-                  MyFlutterApp.users,
-                  size: 27.0,
-                ),
-              ),*/
-              SizedBox(
-                width: 10.0,
-              ),
-              IconButton(
-                splashColor: Colors.white70,
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => EmailScreen())),
-                icon: Icon(
-                  MyFlutterApp.mail,
-                  size: 27.0,
-                ),
-              ),
-              SizedBox(
-                width: 5.0,
-              ),
-              IconButton(
-                splashColor: Colors.white70,
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            NotificationsScreen())),
-                icon: Icon(
-                  MyFlutterApp.alarm,
-                  size: 27.0,
-                ),
-              ),
-              SizedBox(
-                width: 5.0,
-              ),
-            ],
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                SizedBox(
-                  height: 5.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 2.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "What's Happening",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.grey.shade300,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlatButton(
-                        splashColor: Colors.white70,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      WH_Screen()));
-                        },
-                        child: Text(
-                          "+ Show more",
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Trends(
-                    trendImage: "https://picsum.photos/250?image=11",
-                    title: "Drones",
-                    description: "Revolution in air transportation?",
-                    time: "02:30 PM",
-                    icon: MyFlutterApp.rss,
-                    iconColor: Colors.greenAccent.shade700),
-                SizedBox(
-                  height: 20.0,
-                ),
-                /*Trends(
-                    trendImage: "https://picsum.photos/250?image=11",
-                    title: "NVIDIA",
-                    score: "Advancing towards autonomous systems",
-                    time: "02:15 PM",
-                    icon: MyFlutterApp.share,
-                    iconColor: Colors.white70),
-                SizedBox(
-                  height: 5.0,
-                ),*/
-                /* Trends(
-                    trendImage: "https://picsum.photos/250?image=11",
-                    title: "COVID-19",
-                    score: "Vaccination, PROS and CONS from Science and experience",
-                    time: "05:00 PM",
-                    icon: MyFlutterApp.share,
-                    iconColor: Colors.white70),*/
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 2.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "You are going",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.grey.shade300,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlatButton(
-                        splashColor: Colors.white70,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      WH_Screen()));
-                        },
-                        child: Text(
-                          "+ Show more",
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                /*Trends(
-                  trendImage: "https://picsum.photos/250?image=11",
-                  title: "NVIDIA",
-                  score: "Advancing towards autonomous systems",
-                  time: "02:15 PM",
-                  icon: MyFlutterApp.share,
-                  iconColor: Colors.white70,
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Trends(
-                    trendImage: "https://picsum.photos/250?image=11",
-                    title: "NVIDIA",
-                    score: "Advancing towards autonomous systems",
-                    time: "02:15 PM",
-                    icon: MyFlutterApp.share,
-                    iconColor: Colors.white70),
-                SizedBox(
-                  height: 5.0,
-                ),*/
-                Trends(
-                    trendImage: "https://picsum.photos/250?image=11",
-                    title: "COVID-19",
-                    description:
-                        "Vaccination, PROS and CONS from Science and experience",
-                    time: "05:00 PM",
-                    icon: MyFlutterApp.share,
-                    iconColor: Colors.white70),
-                SizedBox(
-                  height: 5.0,
-                ),
-                /*FlatButton(
-                  splashColor: Colors.white70,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => WH_Screen()));
-                  },
-                  child: Text(
-                    "+ Show more",
-                    style: TextStyle(
-                        color: kAmberColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),*/
-                Padding(
-                  padding: const EdgeInsets.only(left: 7.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      "Timeline",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 3.0,
-                ),
-                ChangeNotifierProvider<AuthProvider>.value(
-                  value: AuthProvider.instance,
-                  child: Builder(
-                    builder: (BuildContext context) {
-                      _auth = Provider.of<AuthProvider>(context);
-                      return StreamBuilder<List<Post>>(
-                        stream: DBService.instance.getMyPosts(_auth.user.uid),
-                        builder: (context, _snapshot) {
-                          var _data = _snapshot.data;
-                          if (!_snapshot.hasData) {
-                            return Center(
-                              child: SpinKitFadingFour(
-                                size: 50.0,
-                                color: kAmberColor,
-                              ),
-                            );
-                          }
-                          if (_data.length == 0) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey.shade800
-
-                                    //color: Color(0XFF717171),
-                                  ),
-                                  color: Color.fromRGBO(41, 39, 40, 10.0),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Container(
-                                        height: 100.0,
-                                        width: 100.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/images/start_fire.png")
-                                          )
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      "NOTHING IN YOUR TIMELINE!",
-                                      style: TextStyle(
-                                          fontSize: 23.5, color: Colors.grey),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 18.0),
-                                      child: Amber_Btn_Widget(
-                                        context: context,
-                                        text: "START",
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (BuildContext context) => FirstSuggestionScreen(),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
-                          return Column(
-                            children: _data.toList(),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                ChangeNotifierProvider<AuthProvider>.value(
-                  value: AuthProvider.instance,
-                  child: Builder(
-                    builder: (BuildContext context) {
-                      _auth = Provider.of<AuthProvider>(context);
-                      return StreamBuilder<List<Question>>(
-                        stream: DBService.instance.getQuestions(_auth.user.uid),
-                        builder: (context, _snapshot) {
-                          var _data = _snapshot.data;
-                          if (!_snapshot.hasData) {
-                            return Center(
-                              child: SpinKitFadingFour(
-                                size: 50.0,
-                                color: kAmberColor,
-                              ),
-                            );
-                          }
-                          if (_data.length == 0) {
-                            return Center(
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                    fontSize: 0.0, color: Colors.white70),
-                              ),
-                            );
-                          }
-                          return Column(
-                            children: _data.toList(),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 30.0, bottom: 2.0),
-                        child: Text(
-                          "Suggested Bonfires",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
-                        ),
+      body: ChangeNotifierProvider<AuthProvider>.value(
+          value: AuthProvider.instance,
+          child: Builder(
+            builder: (BuildContext context) {
+              _auth = Provider.of<AuthProvider>(context);
+              return CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    backgroundColor: kFirstAppbarColor,
+                    expandedHeight: 40.0,
+                    elevation: 0.0,
+                    leading: IconButton(
+                      onPressed: () {
+                        showSearch(context: context, delegate: SearchBar());
+                      },
+                      icon: Icon(
+                        MyFlutterApp.magnifier,
+                        size: 25.0,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: FlatButton(
+                    actions: [
+
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      IconButton(
+                        splashColor: Colors.white70,
                         onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                FirstSuggestionScreen(),
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    EmailScreen())),
+                        icon: Icon(
+                          MyFlutterApp.mail,
+                          size: 27.0,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Stack(
+                        children: [
+                          IconButton(
+                            splashColor: Colors.white70,
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        NotificationsScreen())),
+                            icon: Icon(
+                              MyFlutterApp.alarm,
+                              size: 27.0,
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 7, vertical: 3),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: Colors.red),
+                              alignment: Alignment.center,
+                              child: Text('2'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                    ],
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 2.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "What's Happening",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.grey.shade300,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              FlatButton(
+                                splashColor: Colors.white70,
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              WH_Screen()));
+                                },
+                                child: Text(
+                                  "+ Show more",
+                                  style: TextStyle(
+                                      color: Color(0XFFF78C01),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: Text(
-                          "+   See all",
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15.0),
+                        Trends(
+                          trendImage: "https://picsum.photos/250?image=11",
+                          title: "Drones",
+                          description: "Revolution in air transportation?",
+                          time: "2:30 PM",
+                          isLive: true,
                         ),
-                      ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        /*Trends(
+                        trendImage: "https://picsum.photos/250?image=11",
+                        title: "NVIDIA",
+                        score: "Advancing towards autonomous systems",
+                        time: "02:15 PM",
+                        icon: MyFlutterApp.share,
+                        iconColor: Colors.white70),
+                    SizedBox(
+                      height: 5.0,
+                    ),*/
+                        /* Trends(
+                        trendImage: "https://picsum.photos/250?image=11",
+                        title: "COVID-19",
+                        score: "Vaccination, PROS and CONS from Science and experience",
+                        time: "05:00 PM",
+                        icon: MyFlutterApp.share,
+                        iconColor: Colors.white70),*/
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 2.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "You are going",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.grey.shade300,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              FlatButton(
+                                splashColor: Colors.white70,
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              WH_Screen()));
+                                },
+                                child: Text(
+                                  "+ Show more",
+                                  style: TextStyle(
+                                      color: Color(0XFFF78C01),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        /*Trends(
+                      trendImage: "https://picsum.photos/250?image=11",
+                      title: "NVIDIA",
+                      score: "Advancing towards autonomous systems",
+                      time: "02:15 PM",
+                      icon: MyFlutterApp.share,
+                      iconColor: Colors.white70,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2.0,
-                ),
-                Scrollable_BF_Widget(),
-              ],
-            ),
-          )
-        ],
-      ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Trends(
+                        trendImage: "https://picsum.photos/250?image=11",
+                        title: "NVIDIA",
+                        score: "Advancing towards autonomous systems",
+                        time: "02:15 PM",
+                        icon: MyFlutterApp.share,
+                        iconColor: Colors.white70),
+                    SizedBox(
+                      height: 5.0,
+                    ),*/
+                        Trends(
+                            trendImage: "https://picsum.photos/250?image=11",
+                            title: "COVID-19",
+                            description:
+                                "Vaccination, PROS and CONS from Science and experience",
+                            time: "5:00 PM",
+                            icon: MyFlutterApp.share,
+                            iconColor: Colors.white70,
+                            isLive: false),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        /*FlatButton(
+                      splashColor: Colors.white70,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => WH_Screen()));
+                      },
+                      child: Text(
+                        "+ Show more",
+                        style: TextStyle(
+                            color: kAmberColor,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),*/
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7.0),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Text(
+                              "Timeline",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3.0,
+                        ),
+                        ChangeNotifierProvider<AuthProvider>.value(
+                          value: AuthProvider.instance,
+                          child: Builder(
+                            builder: (BuildContext context) {
+                              _auth = Provider.of<AuthProvider>(context);
+                              //TODO: Display title of bonfire (category) and the list of documents userIDs
+                              return StreamBuilder<List<Post>>(
+                                stream: DBService.instance
+                                    .getMyPosts(_auth.user.uid),
+                                builder: (context, _snapshot) {
+                                  var _data = _snapshot.data;
+                                  if (!_snapshot.hasData) {
+                                    return Center(
+                                      child: SpinKitFadingFour(
+                                        size: 50.0,
+                                        color: kAmberColor,
+                                      ),
+                                    );
+                                  }
+                                  if (_data.length == 0) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade800
+
+                                              //color: Color(0XFF717171),
+                                              ),
+                                          color:
+                                              Color.fromRGBO(41, 39, 40, 10.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: Container(
+                                                height: 100.0,
+                                                width: 100.0,
+                                                decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/images/start_fire.png"))),
+                                              ),
+                                            ),
+                                            Text(
+                                              "NOTHING IN YOUR TIMELINE!",
+                                              style: TextStyle(
+                                                  fontSize: 23.5,
+                                                  color: Colors.grey),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 18.0),
+                                              child: Amber_Btn_Widget(
+                                                context: context,
+                                                text: "START",
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          CreatePostPage(),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return Column(
+                                    children: _data.toList(),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 30.0, bottom: 2.0),
+                                child: Text(
+                                  "Suggested Bonfires",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.grey.shade300,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: FlatButton(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        CreatePostPage(),
+                                  ),
+                                ),
+                                child: Text(
+                                  "+   See all",
+                                  style: TextStyle(
+                                      color: Color(0XFFF78C01),
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2.0,
+                        ),
+                        Scrollable_BF_Widget(),
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
+          )),
     );
   }
 }
