@@ -51,9 +51,6 @@ class _TechnologyState extends State<Technology> {
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider _auth = Provider.of<AuthProvider>(context, listen: false);
-    final String currentUser = _auth.user?.uid;
-
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: Builder(builder: (BuildContext context) {
@@ -284,8 +281,8 @@ class _TechnologyState extends State<Technology> {
                                         .setData({
                                       "type": "follow",
                                       "ownerId": _auth.user.uid,
-                                      "username": currentUser,
-                                      "userId": currentUser,
+                                      "username": _auth.user?.uid,
+                                      "userId": _auth.user?.uid,
                                       "number": bonfires.length,
                                       "isRead": false,
                                       "category": widget.bonfire,

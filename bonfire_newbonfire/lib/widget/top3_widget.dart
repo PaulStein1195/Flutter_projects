@@ -129,7 +129,7 @@ class _WHWidgetState extends State<WHWidget> {
                                 _data[_index].description,
                                 style: TextStyle(color: Colors.black),
                               ),
-                              subtitle: Text(_data[_index].solution),
+                              subtitle: Text(_data[_index].category),
                             ),
                           ],
                         ),

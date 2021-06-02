@@ -86,3 +86,22 @@ exports.onCreatePost = functions.firestore
               }
             });
   });
+
+  exports.onDeletePost = functions.firestore
+    .document("/Posts/{userId}/userPosts/{postId}")
+    .onDelete(async (snapshot, context) => {
+      const userId = context.params.userId;
+      const postId = context.params.postId;
+
+           db
+          .collection("TimelineTech")
+          .doc("time_tech")
+          .collection("timelinePosts")
+          .doc(postId)
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              doc.ref.delete();
+            }
+          });
+    });

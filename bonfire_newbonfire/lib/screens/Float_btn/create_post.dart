@@ -22,6 +22,7 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   double _height, _width;
   String _image, _title, _description, _postId = Uuid().v4(), url;
+  String _pickCategory, _bonfire;
   AuthProvider _auth;
   File file;
   bool isUploadingPost = false, isImgInPost = true;
@@ -213,7 +214,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         _mediaUrl = "";
                       } else {
                         DBService.instance.createPostInDB(_auth.user.uid, _postId,
-                            _image, _title, _description, _mediaUrl);
+                            _image, _title, _description, _pickCategory, _bonfire, _mediaUrl);
                         titleController.clear();
                         descriptionController.clear();
                         setState(() {

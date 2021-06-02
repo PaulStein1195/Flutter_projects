@@ -26,6 +26,7 @@ class _ShareInBFState extends State<ShareInBF> {
   double _height, _width;
   bool isUploadingPost = false;
   String _information = '';
+  String _pickCategory, _pickBonfire;
   AuthProvider _auth;
   File file;
 
@@ -53,6 +54,7 @@ class _ShareInBFState extends State<ShareInBF> {
                   MainAxisAlignment.center,
                   children: [
                     showDialogContent(bonfire: "Drones", onTap: () {
+                      _pickCategory = "Drones";
                       Navigator.pop(context, "Drones");
                     }),
 
@@ -60,6 +62,7 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(bonfire: "Software", onTap: (){
+                      _pickCategory = "Software";
                       Navigator.pop(context, "Software");
                     }),
 
@@ -67,6 +70,7 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(bonfire: "Hardware", onTap: () {
+                      _pickCategory = "Hardware";
                       Navigator.pop(context, "Hardware");
                     }),
 
@@ -74,12 +78,14 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(bonfire: "Drones", onTap: () {
+                      _pickCategory = "Drones";
                       Navigator.pop(context, "Drones");
                     }),
                     Divider(
                       color: Colors.white54,
                     ),
                     showDialogContent(bonfire: "HJ", onTap: () {
+                      _pickCategory = "HJ";
                       Navigator.pop(context, "HJ");
 
                     }),
@@ -366,7 +372,7 @@ class _ShareInBFState extends State<ShareInBF> {
                   _mediaUrl = "";
                 } else {
                   DBService.instance.createPostInDB(_auth.user.uid, _postId,
-                      _image, _title, _description, _mediaUrl);
+                      _image, _title, _description, _pickCategory, _pickBonfire, _mediaUrl);
                   titleController.clear();
                   descriptionController.clear();
                   setState(() {
