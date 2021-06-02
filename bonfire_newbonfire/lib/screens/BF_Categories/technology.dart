@@ -1,13 +1,14 @@
-
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:bonfire_newbonfire/widget/bf_subcateg.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../my_flutter_app_icons.dart';
-import '../../../home_screen.dart';
+import '../../../home.dart';
 
+AuthProvider _auth;
 
 class Technology extends StatefulWidget {
   final String bonfire;
@@ -22,6 +23,8 @@ class Technology extends StatefulWidget {
 
 class _TechnologyState extends State<Technology> {
   final String bonfire;
+
+  //
   bool isDrone = false;
   bool isSoftware = false;
   bool isHardware = false;
@@ -38,8 +41,10 @@ class _TechnologyState extends State<Technology> {
   String mechanical = "Mechanical";
   String ws = "Web Server";
   String wd = "Web Development";
-  String usersBonfire = "usersTech";
-  String bf_id = "bf_Id";
+
+  //DB Collections
+  String subColl = "usersTech";
+  String bf_id = "bf_tech";
   List<String> bonfires = [];
 
   _TechnologyState({this.bonfire});
@@ -47,247 +52,274 @@ class _TechnologyState extends State<Technology> {
   @override
   Widget build(BuildContext context) {
     AuthProvider _auth = Provider.of<AuthProvider>(context, listen: false);
+    final String currentUser = _auth.user?.uid;
 
-    return Scaffold(
-      backgroundColor: Color(0XFF333333),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          bonfire,
-          style: TextStyle(color: Colors.white70, fontSize: 25.0),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isDrone = !isDrone;
-                    if (isDrone == true) {
-                      bonfires.add(drones);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.vector,
-                    data: "Drones",
-                    color1:
-                        isDrone == false ? Colors.blue : Colors.grey,
-                    color2: isDrone == false ? Colors.blue.shade300 : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isSoftware = !isSoftware;
-                    if (isSoftware == true) {
-                      bonfires.add(software);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: Icons.computer,
-                    data: "Software",
-                    color1: isSoftware == false ? Colors.amber.shade700 : Colors.grey,
-                    color2: isSoftware == false
-                        ? Colors.amber
-                        : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isHardware = !isHardware;
-                    if (isHardware == true) {
-                      bonfires.add(hardware);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.rocket,
-                    data: "Hardware",
-                    color1:
-                        isHardware == false ? Colors.redAccent : Colors.grey,
-                    color2: isHardware == false
-                        ? Colors.deepOrangeAccent
-                        : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isMechanical = !isMechanical;
-                    if (isMechanical == true) {
-                      bonfires.add(mechanical);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.cog_1,
-                    data: "Mechanical",
-                    color1: isMechanical == false
-                        ? Colors.grey.shade700
-                        : Colors.grey,
-                    color2: isMechanical == false
-                        ? Colors.grey.shade400
-                        : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isWS = !isWS;
-                    if (isWS == true) {
-                      bonfires.add(ws);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.database,
-                    data: "Web Server",
-                    color1: isWS == false ? Colors.greenAccent.shade700 : Colors.grey,
-                    color2: isWS == false
-                        ? Colors.greenAccent
-                        : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isWD = !isWD;
-                    if (isWD == true) {
-                      bonfires.add(wd);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.globe,
-                    data: "Web Development",
-                    color1: isWD == false ? Colors.blue : Colors.grey,
-                    color2: isWD == false ? Colors.greenAccent : Colors.blueGrey, isSelected: null),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white24),
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          height: 60.0,
-                          width: 70.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100.0),
-                          ),
+    return ChangeNotifierProvider<AuthProvider>.value(
+      value: AuthProvider.instance,
+      child: Builder(builder: (BuildContext context) {
+        _auth = Provider.of<AuthProvider>(context);
+        final String currentUserId = _auth.user?.uid;
+        return Scaffold(
+          backgroundColor: Color(0XFF333333),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              bonfire,
+              style: TextStyle(color: Colors.white70, fontSize: 25.0),
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDrone = !isDrone;
+                        if (isDrone == true) {
+                          bonfires.add(drones);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: MyFlutterApp.vector,
+                        data: "Drones",
+                        color1: isDrone == false ? Colors.blue : Colors.grey,
+                        color2: isDrone == false
+                            ? Colors.blue.shade300
+                            : Colors.blueGrey,
+                        isSelected: isDrone),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSoftware = !isSoftware;
+                        if (isSoftware == true) {
+                          bonfires.add(software);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: Icons.computer,
+                        data: "Software",
+                        color1: isSoftware == false
+                            ? Colors.amber.shade700
+                            : Colors.grey,
+                        color2: isSoftware == false
+                            ? Colors.amber
+                            : Colors.blueGrey,
+                        isSelected: isSoftware),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isHardware = !isHardware;
+                        if (isHardware == true) {
+                          bonfires.add(hardware);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: MyFlutterApp.rocket,
+                        data: "Hardware",
+                        color1: isHardware == false
+                            ? Colors.redAccent
+                            : Colors.grey,
+                        color2: isHardware == false
+                            ? Colors.deepOrangeAccent
+                            : Colors.blueGrey,
+                        isSelected: isHardware),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isMechanical = !isMechanical;
+                        if (isMechanical == true) {
+                          bonfires.add(mechanical);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: MyFlutterApp.cog_1,
+                        data: "Mechanical",
+                        color1: isMechanical == false
+                            ? Colors.grey.shade700
+                            : Colors.grey,
+                        color2: isMechanical == false
+                            ? Colors.grey.shade400
+                            : Colors.blueGrey,
+                        isSelected: isMechanical),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isWS = !isWS;
+                        if (isWS == true) {
+                          bonfires.add(ws);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: MyFlutterApp.database,
+                        data: "Web Server",
+                        color1: isWS == false
+                            ? Colors.greenAccent.shade700
+                            : Colors.grey,
+                        color2: isWS == false
+                            ? Colors.greenAccent
+                            : Colors.blueGrey,
+                        isSelected: isWD),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isWD = !isWD;
+                        if (isWD == true) {
+                          bonfires.add(wd);
+                        }
+                      });
+                    },
+                    child: BF_SubCateg_Widget(
+                        icon: MyFlutterApp.globe,
+                        data: "Web Development",
+                        color1: isWD == false ? Colors.blue : Colors.grey,
+                        color2: isWD == false
+                            ? Colors.greenAccent
+                            : Colors.blueGrey,
+                        isSelected: isWD),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white24),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Container(
+                              height: 60.0,
+                              width: 70.0,
                               decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/Yellow-Flame.png")),
                                 borderRadius: BorderRadius.circular(100.0),
-                                /*image: DecorationImage(
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/Yellow-Flame.png")),
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    /*image: DecorationImage(
                                                     image: AssetImage(
                                                         "assets/images/flame_icon1.png")),*/
-                                //Theme.of(context).accentColor,
+                                    //Theme.of(context).accentColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Text(
-                      "+ Add New Bonfire",
-                      style: TextStyle(color: Colors.white, fontSize: 25.0),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 50.0,
-              ),
-              isUploading
-                  ? CircularProgressIndicator()
-                  : Material(
-                      color: Colors
-                          .orange.shade600, //Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      elevation: 3.0,
-                      child: MaterialButton(
-                        onPressed: isUploading
-                            ? null
-                            : () async {
-                                setState(() {
-                                  isUploading = true;
-                                });
-                                await DBService.instance.createBonfire(
-                                    "Bonfire",
-                                    bf_id,
-                                    "abonfire",
-                                    "abonfire",
-                                    usersBonfire,
-                                    _auth.user.uid);
-                                    //bonfires);
-                                /*await Firestore.instance
-                                    .collection(bonfire)
-                                    .document(_currentUser.getCurrentUser.uid).collection(usersBonfire).document(bf_id).
-                                    updateData(
-                                  {
-                                    "bonfire": bonfires
-                                    /* NESTED ARRAY
-                                    "bonfires": {
-                                      bonfire: bonfires
-                                    }*/
-                                  },
-                                );*/
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        HomeScreen(),
-                                  ),
-                                );
-                              },
-                        minWidth: 300.0,
-                        height: 42.0,
-                        child: Text(
-                          "DONE",
-                          style: TextStyle(
-                              letterSpacing: 0.3,
-                              fontSize: 17.5,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                        Text(
+                          "+ Add New Bonfire",
+                          style: TextStyle(color: Colors.white, fontSize: 25.0),
                         ),
-                      ),
+                      ],
                     ),
-              SizedBox(
-                height: 50.0,
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  isUploading
+                      ? CircularProgressIndicator()
+                      : Material(
+                          color: Colors
+                              .orange.shade600, //Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          elevation: 3.0,
+                          child: MaterialButton(
+                            onPressed: isUploading
+                                ? null
+                                : () async {
+                                    setState(() {
+                                      isUploading = true;
+                                    });
+                                    for (var abonfire in bonfires) {
+                                      print(abonfire);
+                                      await DBService.instance.createBonfire(
+                                          "Tech",
+                                          bf_id,
+                                          subColl,
+                                          _auth.user.uid);
+                                      //Update activity Feed and add it
+                                    }
+                                    await Firestore.instance
+                                        .collection("FeedItems")
+                                        .document(_auth.user.uid)
+                                        .collection("feedItems")
+                                        .document(bf_id)
+                                        .setData({
+                                      "type": "follow",
+                                      "ownerId": _auth.user.uid,
+                                      "username": currentUser,
+                                      "userId": currentUser,
+                                      "number": bonfires.length,
+                                      "isRead": false,
+                                      "category": widget.bonfire,
+                                      "timestamp": Timestamp.now(),
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeScreen(),
+                                      ),
+                                    );
+                                  },
+                            minWidth: 300.0,
+                            height: 42.0,
+                            child: Text(
+                              "DONE",
+                              style: TextStyle(
+                                  letterSpacing: 0.3,
+                                  fontSize: 17.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

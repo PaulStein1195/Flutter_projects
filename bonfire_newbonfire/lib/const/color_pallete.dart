@@ -6,6 +6,7 @@ const kFirstAppbarColor = Color.fromRGBO(41, 39, 40, 180.0);//Color.fromRGBO(41,
 const kFirstBackgroundColor = Color.fromRGBO(41, 39, 40, 150.0);
 const kMainBoxColor = Color(0XFF292728);
 const kAmberColor = Color(0XFFffb21a);
+const kTitlesrelevant = Color(0XFFF78C01);
 
 
 Widget kAppbar(BuildContext context) {

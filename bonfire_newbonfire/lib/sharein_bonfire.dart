@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:bonfire_newbonfire/providers/auth.dart';
-import 'package:bonfire_newbonfire/home_screen.dart';
+import 'package:bonfire_newbonfire/home.dart';
 import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
-import 'package:bonfire_newbonfire/screens/Floating_create/create_post.dart';
+import 'package:bonfire_newbonfire/screens/Float_btn/create_post.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';

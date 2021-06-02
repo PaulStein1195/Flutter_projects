@@ -1,5 +1,7 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
+import 'package:bonfire_newbonfire/screens/Profile/others_profile.dart';
+import 'package:bonfire_newbonfire/screens/Profile/profile.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +15,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../my_flutter_app_icons.dart';
 import 'comment.dart';
-
+User currentUser;
 AuthProvider _auth;
 bool isImage = false;
 
@@ -131,6 +133,10 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  AuthProvider _auth;
+
+  final String currentUserId = currentUser?.uid;
+
   final String postId;
   final String ownerId;
   final String image;
@@ -298,7 +304,7 @@ class _PostState extends State<Post> {
       builder: (BuildContext context) {
         _auth = Provider.of<AuthProvider>(context);
         return StreamBuilder<List<Post>>(
-          stream: DBService.instance.getMyPosts(_auth.user.uid),
+          stream: DBService.instance.getMyPosts(ownerId),
           builder: (context, _snapshot) {
             var _data = _snapshot.data;
             print(_snapshot.data);
@@ -308,6 +314,8 @@ class _PostState extends State<Post> {
                 size: 50.0,
               );
             }
+            bool isPostOwner = currentUserId == ownerId;
+
             return Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Container(
@@ -324,7 +332,7 @@ class _PostState extends State<Post> {
                       children: [
                   StreamBuilder<User>(
                   stream: DBService.instance
-                      .getUserData(_auth.user.uid),
+                      .getUserData(ownerId),
                   builder: (context, _snapshot) {
                     var _data = _snapshot.data;
                     print(_snapshot.data);
@@ -334,35 +342,45 @@ class _PostState extends State<Post> {
                         size: 50.0,
                       );
                     }
+                    bool isPostOwner = _auth.user.uid == ownerId;
+                    print(_auth.user.uid);
+
                     return ListTile(
-                      leading: Container(
-                        width: 55,
-                        height: 55,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.white70, width: 2.0),
-                          borderRadius: BorderRadius.circular(50),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: _data.profileImage == null
-                                ? AssetImage("")
-                                : NetworkImage(_data.profileImage),
+                      leading: GestureDetector(
+                        onTap: () => showProfile(context, profileId: _data.uid),
+                        child: Container(
+                          width: 55,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.white70, width: 2.0),
+                            borderRadius: BorderRadius.circular(50),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: _data.profileImage == null
+                                  ? AssetImage("")
+                                  : NetworkImage(_data.profileImage),
+                            ),
                           ),
+                          child: _data.profileImage !=
+                              null
+                              ? Center(
+                            child: GestureDetector(
+                              onTap: () => showProfile(context, profileId: _data.uid),
+
+                              child: Text(
+                                _data.name[0],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight:
+                                    FontWeight
+                                        .w700),
+                              ),
+                            ),
+                          )
+                              : Text(""),
                         ),
-                        child: _data.profileImage !=
-                            null
-                            ? Center(
-                          child: Text(
-                            _data.name[0],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight:
-                                FontWeight
-                                    .w700),
-                          ),
-                        )
-                            : Text(""),
                       ),
                       title: Text(
                         _data.name,
@@ -391,7 +409,7 @@ class _PostState extends State<Post> {
                           ],
                         ),
                       ),
-                      trailing: IconButton(
+                      trailing: isPostOwner ? IconButton(
                         splashColor: Colors.white70,
                         icon: Icon(
                           CupertinoIcons.ellipsis,
@@ -465,7 +483,7 @@ class _PostState extends State<Post> {
                               });
                           //Display option menu of sharing or Deleting Post
                         },
-                      ),
+                      ) : Text("")
                     );
                   }
               ),
@@ -754,5 +772,17 @@ Widget _listTileTrailingWidgets(Timestamp _lastMessageTimestamp) {
   return Text(
     timeago.format(_lastMessageTimestamp.toDate()),
     style: TextStyle(fontSize: 13, color: Colors.white70),
+  );
+}
+
+
+showProfile(BuildContext context, {String profileId}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => OthersProfile(
+        profileId: profileId,
+      ),
+    ),
   );
 }

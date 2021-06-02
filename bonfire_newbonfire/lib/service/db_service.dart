@@ -1,11 +1,13 @@
+import 'package:bonfire_newbonfire/model/bonfire.dart';
 import 'package:bonfire_newbonfire/model/comment.dart';
+import 'package:bonfire_newbonfire/model/notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/model/post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../notifications_screen.dart';
+import '../notifications.dart';
 import 'navigation_service.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,6 +25,7 @@ class DBService {
   String _postsCollection = "Posts";
   String _commentsCollection = "Message";
   String _feedItemsCollection = "FeedItems";
+
 
   Future<void> createPostInDB(String _uid,
       String _postId,
@@ -73,29 +76,6 @@ class DBService {
     }
   }
 
-  Future<FirebaseUser> handleSignIn() async {
-    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    print("signed in " + user.displayName);
-    try {
-      await _db.collection(_userCollection).document(user.uid).setData({
-        "name": user.displayName,
-        "email": user.email,
-        "image": user.photoUrl,
-        "bio": "",
-        "lastSeen": DateTime.now().toUtc(),
-      });
-      NavigationService.instance.navigateToReplacement("home");
-    } catch (e) {
-      print(e);
-    }
-  }
-
   Future<void> createUserInDB(String _uid, String _name, String _email,
       String _bio) async {
     try {
@@ -111,28 +91,12 @@ class DBService {
     }
   }
 
-  Future<void> createUserGoogle(User user) async {
-    try {
-      return await _db.collection("Users").document(user.uid).setData({
-        'name': user.name,
-        'email': user.email,
-        "profileImage": user.profileImage,
-        "bio": "",
-        'lastSeen': Timestamp.now(),
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
 
-  Future<void> createBonfire(String bonfire, String bf_Id, String bfColl,
-      String bf_Id2, String bfColl2, String uid) async {
+  Future<void> createBonfire(String bonfire, String bf_Id, String _subCollection, String uid) async {
     return await _db
         .collection(bonfire)
         .document(bf_Id)
-        .collection(bfColl)
-        .document(bf_Id2)
-        .collection(bfColl2)
+        .collection(_subCollection)
         .document(uid)
         .setData({});
   }
@@ -146,6 +110,7 @@ class DBService {
     });
   }
 
+
   Stream<List<Post>> getPostsInDB() {
     var _ref = _db.collection("Posts").document().collection("usersPosts");
     return _ref.getDocuments().asStream().map((_snapshot) {
@@ -154,6 +119,27 @@ class DBService {
       }).toList();
     });
   }
+
+  Stream <List<NotificationItem>> getNotificationsItem(String _userID) {
+    var _ref = _db.collection(_feedItemsCollection)
+        .document(_userID)
+        .collection("feedItems")
+        .orderBy("timestamp", descending: true);
+    return _ref.getDocuments().asStream().map((_snapshot) {
+      return _snapshot.documents.map((_doc) {
+        return NotificationItem.fromDocument(_doc);
+      }).toList();
+    });
+  }
+  
+  Stream <User> isUserInTech (String _userID) {
+    var _ref = _db.collection("FollowingTech").document(_userID);
+    return _ref.get().asStream().map((_snapshot) {
+      return User.fromDocument(_snapshot);
+    });
+  }
+
+
 
   Stream<List<Post>> getMyPosts(String _userID) {
     var _ref = _db
@@ -212,6 +198,7 @@ class DBService {
   }*/
 
 
+
   Stream<User> getUserData(String _userID) {
     var _ref = _db.collection(_userCollection).document(_userID);
     return _ref.get().asStream().map((_snapshot) {
@@ -232,17 +219,20 @@ class DBService {
     });
   }
 
-  Stream<List<NotificationItem>> getActivityFeed(String _userID) {
-    var _ref = _db.collection(_feedItemsCollection)
-        .document(_userID)
-        .collection("feedItems")
-        .orderBy("timestamp", descending: true)
-        .limit(50);
-    return _ref.snapshots().map((_snapshot) {
+  //Get BONFIRE Categories Timelines
+  //1) TECH
+  Stream<List<Post>> getTimelinePosts() {
+    var _ref = _db.collection("TimelineTech")
+        .document("time_tech")
+        .collection("timelinePosts")
+        .orderBy("timestamp", descending: true).limit(10);
+    return _ref.getDocuments().asStream().map((_snapshot) {
       return _snapshot.documents.map((_doc) {
-        return NotificationItem.fromFirestore(_doc);
+        return Post.fromFirestore(_doc);
       }).toList();
     });
   }
+
+  //2) NATURE
 
 }

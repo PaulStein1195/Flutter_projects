@@ -1,5 +1,5 @@
 import 'package:bonfire_newbonfire/model/user.dart';
-import 'package:bonfire_newbonfire/home_screen.dart';
+import 'package:bonfire_newbonfire/home.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,7 +103,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signUpGoogle() async {
+  /*void signUpGoogle() async {
     status = AuthStatus.Authenticating;
     notifyListeners();
     GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -135,7 +135,7 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       print("Error from Google $e");
     }
-  }
+  }*/
 
   void logoutUser(Future<void> onSuccess()) async {
     try {

@@ -1,13 +1,13 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
+import 'package:bonfire_newbonfire/screens/BF_Categories/select_bonfires_screen.dart';
 import 'package:bonfire_newbonfire/widget/bf_subcateg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../../home_screen.dart';
+import '../../../home.dart';
 import '../../../my_flutter_app_icons.dart';
-import '../select_bonfires_screen.dart';
 
 
 String bf_Id;
@@ -206,7 +206,7 @@ class BonfireCategoriesState extends State<BF_Arts> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                FirstSuggestionScreen()),
+                                                SelectBonfireScreen()),
                                         ModalRoute.withName("home"),
                                       );
                                     },

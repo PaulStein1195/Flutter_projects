@@ -4,62 +4,59 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../my_flutter_app_icons.dart';
+
 
 Widget mediaPreview;
 String ActivityItemText;
 
 class NotificationItem extends StatelessWidget {
-  final String name;
-  final String uid;
+  final String username;
+  final String userId;
   final String type;
   final String mediaUrl;
   final String postId;
   final String userProfileImg;
   final String commentData;
+  final String category;
+  final int number;
+  final bool isRead;
   final Timestamp timestamp;
 
   NotificationItem({
-    this.name,
-    this.uid,
+    this.username,
+    this.userId,
     this.type,
     this.mediaUrl,
     this.postId,
     this.userProfileImg,
     this.commentData,
+    this.category,
+    this.number,
+    this.isRead,
     this.timestamp,
   });
 
   factory NotificationItem.fromDocument(DocumentSnapshot doc) {
     return NotificationItem(
-      name: doc["name"],
-      uid: doc["uid"],
+      username: doc["username"],
+      userId: doc["userId"],
       type: doc["type"],
       mediaUrl: doc["mediaUrl"],
       postId: doc["postId"],
       userProfileImg: doc["userProfileImg"],
       commentData: doc["commentData"],
+      category: doc["category"],
+      number: doc["number"],
+      isRead: doc["isRead"],
       timestamp: doc["timestamp"],
-    );
-  }
-
-
-
-  showPost(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PostScreen(
-          postId: postId,
-          userId: uid,
-        ),
-      ),
     );
   }
 
   configureMediaPreview(context) {
     if (type == "comment") {
       mediaPreview = GestureDetector(
-        onTap: () => showPost(context),
+        onTap: () {},
         child: Container(
           height: 50.0,
           width: 50.0,
@@ -67,10 +64,10 @@ class NotificationItem extends StatelessWidget {
             aspectRatio: 16 / 9,
             child: Container(
               decoration: BoxDecoration(
-                /*image: DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(mediaUrl),
-                ),*/
+                  image: NetworkImage(mediaUrl),
+                ),
               ),
             ),
           ),
@@ -83,10 +80,9 @@ class NotificationItem extends StatelessWidget {
     if (type == "like") {
       ActivityItemText = "liked your post";
     } else if (type == "follow") {
-      ActivityItemText = "$name is following you";
+      ActivityItemText = 'You have joined $number Bonfires in $category';
     } else if (type == "comment") {
-
-      ActivityItemText = "$name replied: $commentData";
+      ActivityItemText = "$username replied: $commentData";
     } else {
       ActivityItemText = "Error: Unknown type '$type'";
     }
@@ -97,54 +93,71 @@ class NotificationItem extends StatelessWidget {
     configureMediaPreview(context);
 
     return Padding(
-      padding: EdgeInsets.only(top: 2.0),
+      padding: EdgeInsets.only(top: 10.0),
       child: Container(
+        height: 90,
         decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(width: 1.0, color: Colors.grey.shade300),
-              bottom: BorderSide(width: 1.0, color: Colors.grey.shade300),
-            )
+          color: Color.fromRGBO(41, 39, 40, 10.0),
+          border: Border.all(color: Colors.grey.shade800),
+          borderRadius: BorderRadius.circular(10.0),
+          //color: Color.fromRGBO(41, 39, 40, 10.0),
         ),
-        child: ListTile(
-          title: GestureDetector(
-            onTap: () {},//=> showProfile(context, profileId: uid),
-            child: RichText(
-              overflow: TextOverflow.ellipsis,
-              text: TextSpan(
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.blueGrey.shade700,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: '$ActivityItemText',
+        child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 55.0,
+                    width: 55.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        gradient: LinearGradient(
+                            end: Alignment.topCenter,
+                            begin: Alignment.bottomLeft,
+                            colors: [
+                              Colors.orange.shade600,
+                              Colors.orangeAccent
+                            ])),
+                    child: Icon(
+                      MyFlutterApp.alarm,
+                      color: Colors.white70,
+                      size: 30.0,
                     ),
-                  ]),
-            ),
-          ),
-          leading: CircleAvatar(
-              backgroundImage:  (userProfileImg == null) //CachedNetworkImageProvider(userProfileImg),),
-                  ? new AssetImage('images/user-avatar.png')
-                  : new NetworkImage(userProfileImg)),
-          subtitle: Text(
-            timeago.format(timestamp.toDate()),
-            overflow: TextOverflow.ellipsis,
-          ),
-          trailing: mediaPreview,
-        ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '$ActivityItemText',
+                            style: TextStyle(color: Colors.orange, fontSize: 16.0, fontWeight: FontWeight.w600),
+                            maxLines: 3,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              timeago.format(timestamp.toDate()),
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.0),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )),
       ),
     );
   }
 }
-
-/*showProfile(BuildContext context, {String profileId}) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Profile(
-        profileId: profileId,
-      ),
-    ),
-  );
-}*/

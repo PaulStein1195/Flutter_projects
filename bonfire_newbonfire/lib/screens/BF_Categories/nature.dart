@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../../../my_flutter_app_icons.dart';
-import '../../../home_screen.dart';
+import '../../../home.dart';
 
 AuthProvider _auth;
 
 class Nature extends StatefulWidget {
   final String bonfire;
+  final String myUser;
 
-  Nature({this.bonfire});
+  Nature({this.bonfire, this.myUser});
 
   @override
   _NatureState createState() => _NatureState(
@@ -51,91 +52,88 @@ class _NatureState extends State<Nature> {
   String travel = "Travel";
   String climate = "Climate Change";
   String general = "General";
-  String usersBonfire = "usersNature";
-  String bf_id = "bf_Id";
+
+  //DB Collections
+  String subColl = "usersNature";
+  String bf_id = "bf_nat";
   List<String> bonfires = [];
 
   int totalBonfires = 0;
-
 
   _NatureState({this.bonfire});
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider _auth = Provider.of<AuthProvider>(context, listen: false);
-    final String currentUser = _auth.user?.uid;
-
-    return Scaffold(
-      backgroundColor: Color(0XFF232020),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0XFF232020),
-        elevation: 0.0,
-        title: Text(
-          bonfire,
-          style: TextStyle(color: Colors.white70, fontSize: 25.0),
-        ),
-        actions: [
-          isUploading
-              ? Padding(
+    return ChangeNotifierProvider<AuthProvider>.value(
+      value: AuthProvider.instance,
+      child: Builder(
+        builder: (BuildContext context) {
+          _auth = Provider.of<AuthProvider>(context);
+          final String currentUserId = _auth.user?.uid;
+          return Scaffold(
+            backgroundColor: Color(0XFF232020),
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Color(0XFF232020),
+              elevation: 0.0,
+              title: Text(
+                bonfire,
+                style: TextStyle(color: Colors.white70, fontSize: 25.0),
+              ),
+              actions: [
+                isUploading
+                    ? Padding(
                   padding: const EdgeInsets.only(left: 12.0),
                   child: SpinKitCircle(
                     color: Colors.orangeAccent,
                     size: 30.0,
                   ),
                 )
-              : Padding(
+                    : Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Material(
                     color:
-                        Colors.orange.shade600, //Theme.of(context).accentColor,
+                    Colors.orange.shade600, //Theme.of(context).accentColor,
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     elevation: 3.0,
                     child: MaterialButton(
                       onPressed: isUploading
                           ? null
                           : () async {
-                              setState(() {
-                                isUploading = true;
-                              });
-                              //TODO: Create function that iterates over a loop of for(category of List then add user in that bonfire)
-                              for (var abonfire in bonfires) {
-                                print(abonfire);
-                                await DBService.instance.createBonfire(
-                                  "Bonfire",
-                                    bf_id,
-                                    abonfire,
-                                    "id_$abonfire",
-                                    usersBonfire,
-                                    _auth.user.uid);
-                                /*await Firestore.instance.collection(abonfire)
-                                    .document("bf_Id")
-                                    .collection("usersNature")
-                                    .document(currentUser)
-                                    .setData({});*/
-                              }
-                              //Update activity Feed and add it
-                              await Firestore.instance.collection("FeedItems")
-                                  .document(_auth.user.uid)
-                                  .collection("feedItems")
-                                  .document(bf_id)
-                                  .setData({
-                                "type": "follow",
-                                "ownerId": _auth.user.uid,
-                                "username": currentUser,
-                                "userId": currentUser,
-                                "number": bonfires.length,
-                                "isRead": false,
-                                "timestamp":  Timestamp.now(),
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      HomeScreen(),
-                                ),
-                              );
-                            },
+                        setState(() {
+                          isUploading = true;
+                        });
+                        //TODO: Create function that iterates over a loop of for(category of List then add user in that bonfire)
+                        for (var abonfire in bonfires) {
+                          print(abonfire);
+                          await DBService.instance.createBonfire(
+                              "Nature", bf_id, subColl, _auth.user.uid);
+                          //Update activity Feed and add it
+                        }
+                        await Firestore.instance
+                            .collection("FeedItems")
+                            .document(_auth.user.uid)
+                            .collection("feedItems")
+                            .document(bf_id)
+                            .setData({
+                          "type": "follow",
+                          "ownerId": _auth.user.uid,
+                          "username": currentUserId,
+                          "userId": currentUserId,
+                          "number": bonfires.length,
+                          "category": widget.bonfire,
+
+                          "isRead": false,
+                          "timestamp": Timestamp.now(),
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                HomeScreen(),
+                          ),
+                        );
+                      },
                       minWidth: 50.0,
                       height: 30.0,
                       child: Text(
@@ -149,210 +147,210 @@ class _NatureState extends State<Nature> {
                     ),
                   ),
                 ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text("Animals",
-                    style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w800)),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isDog = !isDog;
-                    if (isDog == true) {
-                      bonfires.add(dogs);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.guidedog,
-                    data: dogs,
-                    color1: isDog == false
-                        ? Colors.brown.shade400.withBlue(35)
-                        : Colors.grey,
-                    color2: isDog == false
-                        ? Colors.brown.shade200.withBlue(120)
-                        : Colors.blueGrey,
-                    isSelected: isDog),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isCat = !isCat;
-                    if (isCat == true) {
-                      bonfires.add(cats);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.cat,
-                    data: "Cats",
-                    color1: isCat == false
-                        ? Colors.brown.shade400.withBlue(35)
-                        : Colors.grey,
-                    color2: isCat == false
-                        ? Colors.brown.shade200.withBlue(120)
-                        : Colors.blueGrey,
-                    isSelected: isCat),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isBird = !isBird;
-                    if (isDog == true) {
-                      bonfires.add(birds);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.twitter_bird,
-                    data: "Birds",
-                    color1: isBird == false
-                        ? Colors.brown.shade400.withBlue(35)
-                        : Colors.grey,
-                    color2: isBird == false
-                        ? Colors.brown.shade200.withBlue(120)
-                        : Colors.blueGrey,
-                    isSelected: isBird),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isUnique = !isUnique;
-                    if (isUnique == true) {
-                      bonfires.add(unique);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.paw,
-                    data: "Unique",
-                    color1: isUnique == false
-                        ? Colors.brown.shade400.withBlue(35)
-                        : Colors.grey,
-                    color2: isUnique == false
-                        ? Colors.brown.shade200.withBlue(120)
-                        : Colors.blueGrey,
-                    isSelected: isUnique),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text("Plants",
-                    style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w800)),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isIndoor = !isIndoor;
-                    if (isIndoor == true) {
-                      bonfires.add(indoor);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.leaf,
-                    data: indoor,
-                    color1: isIndoor == false ? Colors.green : Colors.grey,
-                    color2: isIndoor == false
-                        ? Colors.greenAccent
-                        : Colors.blueGrey,
-                    isSelected: isIndoor),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isOutdoor = !isOutdoor;
-                    if (isOutdoor == true) {
-                      bonfires.add(outdoor);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.tree_2,
-                    data: outdoor,
-                    color1: isOutdoor == false ? Colors.green : Colors.grey,
-                    color2: isOutdoor == false
-                        ? Colors.greenAccent
-                        : Colors.blueGrey,
-                    isSelected: isOutdoor),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isGardening = !isGardening;
-                    if (isGardening == true) {
-                      bonfires.add(gardening);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.garden,
-                    data: gardening,
-                    color1: isGardening == false ? Colors.green : Colors.grey,
-                    color2: isGardening == false
-                        ? Colors.greenAccent
-                        : Colors.blueGrey,
-                    isSelected: isGardening),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isDIY = !isDIY;
-                    if (isDIY == true) {
-                      bonfires.add(plants);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.seedling,
-                    data: diy,
-                    color1: isDIY == false ? Colors.green : Colors.grey,
-                    color2:
-                        isDIY == false ? Colors.greenAccent : Colors.blueGrey,
-                    isSelected: isDIY),
-              ),
-              /*SizedBox(
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text("Animals",
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w800)),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isDog = !isDog;
+                          if (isDog == true) {
+                            bonfires.add(dogs);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.guidedog,
+                          data: dogs,
+                          color1: isDog == false
+                              ? Color(0XFFD3A01F)
+                              : Colors.grey,
+                          color2: isDog == false
+                              ? Color(0XFFF7EC9C)
+                              : Colors.blueGrey,
+                          isSelected: isDog),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isCat = !isCat;
+                          if (isCat == true) {
+                            bonfires.add(cats);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.cat,
+                          data: "Cats",
+                          color1: isCat == false
+                              ? Color(0XFFD3A01F)
+                              : Colors.grey,
+                          color2: isCat == false
+                              ? Color(0XFFF7EC9C)
+                              : Colors.blueGrey,
+                          isSelected: isCat),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isBird = !isBird;
+                          if (isDog == true) {
+                            bonfires.add(birds);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.twitter_bird,
+                          data: "Birds",
+                          color1: isBird == false
+                              ? Color(0XFFD3A01F)
+                              : Colors.grey,
+                          color2: isBird == false
+                              ? Color(0XFFF7EC9C)
+                              : Colors.blueGrey,
+                          isSelected: isBird),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isUnique = !isUnique;
+                          if (isUnique == true) {
+                            bonfires.add(unique);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.paw,
+                          data: "Unique",
+                          color1: isUnique == false
+                              ? Color(0XFFD3A01F)
+                              : Colors.grey,
+                          color2: isUnique == false
+                              ? Color(0XFFF7EC9C)
+                              : Colors.blueGrey,
+                          isSelected: isUnique),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text("Plants",
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w800)),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isIndoor = !isIndoor;
+                          if (isIndoor == true) {
+                            bonfires.add(indoor);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.leaf,
+                          data: indoor,
+                          color1: isIndoor == false ? Colors.green : Colors.grey,
+                          color2: isIndoor == false
+                              ? Colors.greenAccent
+                              : Colors.blueGrey,
+                          isSelected: isIndoor),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isOutdoor = !isOutdoor;
+                          if (isOutdoor == true) {
+                            bonfires.add(outdoor);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.tree_2,
+                          data: outdoor,
+                          color1: isOutdoor == false ? Colors.green : Colors.grey,
+                          color2: isOutdoor == false
+                              ? Colors.greenAccent
+                              : Colors.blueGrey,
+                          isSelected: isOutdoor),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isGardening = !isGardening;
+                          if (isGardening == true) {
+                            bonfires.add(gardening);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.garden,
+                          data: gardening,
+                          color1: isGardening == false ? Colors.green : Colors.grey,
+                          color2: isGardening == false
+                              ? Colors.greenAccent
+                              : Colors.blueGrey,
+                          isSelected: isGardening),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isDIY = !isDIY;
+                          if (isDIY == true) {
+                            bonfires.add(plants);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.seedling,
+                          data: diy,
+                          color1: isDIY == false ? Colors.green : Colors.grey,
+                          color2:
+                          isDIY == false ? Colors.greenAccent : Colors.blueGrey,
+                          isSelected: isDIY),
+                    ),
+                    /*SizedBox(
                 height: 10.0,
               ),
               Padding(
@@ -457,107 +455,110 @@ class _NatureState extends State<Nature> {
                         ? Colors.deepPurple.shade300
                         : Colors.blueGrey),
               ),*/
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text("Environment",
-                    style: TextStyle(
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text("Environment",
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w800)),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isClimate = !isClimate;
+                          if (isClimate == true) {
+                            bonfires.add(climate);
+                          }
+                        });
+                      },
+                      child: BF_SubCateg_Widget(
+                          icon: MyFlutterApp.earth,
+                          data: "Climate Change",
+                          color1: isClimate == false
+                              ? Colors.lightBlueAccent.shade700
+                              : Colors.grey,
+                          color2: isClimate == false
+                              ? Colors.lightBlueAccent
+                              : Colors.blueGrey),
+                    ),
+                    SizedBox(
+                      height: 25.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Divider(
                         color: Colors.white70,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w800)),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isClimate = !isClimate;
-                    if (isClimate == true) {
-                      bonfires.add(climate);
-                    }
-                  });
-                },
-                child: BF_SubCateg_Widget(
-                    icon: MyFlutterApp.earth,
-                    data: "Climate Change",
-                    color1: isClimate == false
-                        ? Colors.lightBlueAccent.shade700
-                        : Colors.grey,
-                    color2: isClimate == false
-                        ? Colors.lightBlueAccent
-                        : Colors.blueGrey),
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Divider(
-                  color: Colors.white70,
-                ),
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.orangeAccent),
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Row(
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25.0,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                              height: 60.0,
-                              width: 70.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/Yellow-Flame.png")),
-                                    borderRadius: BorderRadius.circular(100.0),
-                                    /*image: DecorationImage(
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.orangeAccent),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    height: 60.0,
+                                    width: 70.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/images/Yellow-Flame.png")),
+                                          borderRadius: BorderRadius.circular(100.0),
+                                          /*image: DecorationImage(
                                                     image: AssetImage(
                                                         "assets/images/flame_icon1.png")),*/
-                                    //Theme.of(context).accentColor,
+                                          //Theme.of(context).accentColor,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              Text(
+                                "+ Add New Bonfire",
+                                style: TextStyle(
+                                    color: Colors.orangeAccent, fontSize: 25.0),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          "+ Add New Bonfire",
-                          style: TextStyle(
-                              color: Colors.orangeAccent, fontSize: 25.0),
+                        SizedBox(
+                          height: 50.0,
+                        ),
+                        SizedBox(
+                          height: 50.0,
                         ),
                       ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
