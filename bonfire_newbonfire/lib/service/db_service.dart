@@ -26,15 +26,16 @@ class DBService {
   String _commentsCollection = "Message";
   String _feedItemsCollection = "FeedItems";
 
-
-  Future<void> createPostInDB(String _uid,
-      String _postId,
-      String _image,
-      String _title,
-      String _description,
-      String _category,
-      String _bonfire,
-      String _mediaUrl,) async {
+  Future<void> createPostInDB(
+    String _uid,
+    String _postId,
+    String _image,
+    String _title,
+    String _description,
+    String _category,
+    String _bonfire,
+    String _mediaUrl,
+  ) async {
     try {
       return await _db
           .collection(_postsCollection)
@@ -69,7 +70,7 @@ class DBService {
           .document(_postId)
           .get()
           .then(
-            (doc) {
+        (doc) {
           if (doc.exists) {
             doc.reference.delete();
           }
@@ -80,14 +81,16 @@ class DBService {
     }
   }
 
-  Future<void> createUserInDB(String _uid, String _name, String _email,
-      String _bio) async {
+  Future<void> createUserInDB(
+      String _uid, String _name, String _email, String _bio) async {
     try {
       return await _db.collection(_userCollection).document(_uid).setData({
         "name": _name,
         "email": _email,
         "profileImage": "",
         "bio": _bio,
+        "bonfires": 0,
+        "posts": 0,
         "lastSeen": DateTime.now().toUtc(),
       });
     } catch (error) {
@@ -95,8 +98,8 @@ class DBService {
     }
   }
 
-
-  Future<void> createBonfire(String bonfire, String bf_Id, String _subCollection, String uid) async {
+  Future<void> createBonfire(
+      String bonfire, String bf_Id, String _subCollection, String uid) async {
     return await _db
         .collection(bonfire)
         .document(bf_Id)
@@ -114,7 +117,6 @@ class DBService {
     });
   }
 
-
   Stream<List<Post>> getPostsInDB() {
     var _ref = _db.collection("Posts").document().collection("usersPosts");
     return _ref.getDocuments().asStream().map((_snapshot) {
@@ -124,8 +126,9 @@ class DBService {
     });
   }
 
-  Stream <List<NotificationItem>> getNotificationsItem(String _userID) {
-    var _ref = _db.collection(_feedItemsCollection)
+  Stream<List<NotificationItem>> getNotificationsItem(String _userID) {
+    var _ref = _db
+        .collection(_feedItemsCollection)
         .document(_userID)
         .collection("feedItems")
         .orderBy("timestamp", descending: true);
@@ -135,15 +138,13 @@ class DBService {
       }).toList();
     });
   }
-  
-  Stream <User> isUserInTech (String _userID) {
+
+  Stream<User> isUserInTech(String _userID) {
     var _ref = _db.collection("FollowingTech").document(_userID);
     return _ref.get().asStream().map((_snapshot) {
       return User.fromDocument(_snapshot);
     });
   }
-
-
 
   Stream<List<Post>> getMyPosts(String _userID) {
     var _ref = _db
@@ -201,8 +202,6 @@ class DBService {
     }
   }*/
 
-
-
   Stream<User> getUserData(String _userID) {
     var _ref = _db.collection(_userCollection).document(_userID);
     return _ref.get().asStream().map((_snapshot) {
@@ -225,11 +224,13 @@ class DBService {
 
   //Get BONFIRE Categories Timelines
   //1) TECH
-  Stream<List<Post>> getTimelinePosts() {
-    var _ref = _db.collection("TimelineTech")
+  Stream<List<Post>> getTechTimeline() {
+    var _ref = _db
+        .collection("TimelineTech")
         .document("time_tech")
         .collection("timelinePosts")
-        .orderBy("timestamp", descending: true).limit(10);
+        .orderBy("timestamp", descending: true)
+        .limit(10);
     return _ref.getDocuments().asStream().map((_snapshot) {
       return _snapshot.documents.map((_doc) {
         return Post.fromFirestore(_doc);
@@ -238,5 +239,36 @@ class DBService {
   }
 
   //2) NATURE
+  Stream<List<Post>> getNatureTimeline() {
+    var _ref = _db
+        .collection("TimelineNat")
+        .document("time_nature")
+        .collection("timelinePosts")
+        .orderBy("timestamp", descending: true)
+        .limit(10);
+    return _ref.getDocuments().asStream().map((_snapshot) {
+      return _snapshot.documents.map((_doc) {
+        return Post.fromFirestore(_doc);
+      }).toList();
+    });
+  }
 
+  //3) HEALTH
+  Stream<List<Post>> getHealthTimeline() {
+    var _ref = _db
+        .collection("TimelineHealth")
+        .document("time_health")
+        .collection("timelinePosts")
+        .orderBy("timestamp", descending: true)
+        .limit(10);
+    return _ref.getDocuments().asStream().map(
+      (_snapshot) {
+        return _snapshot.documents.map(
+          (_doc) {
+            return Post.fromFirestore(_doc);
+          },
+        ).toList();
+      },
+    );
+  }
 }

@@ -197,10 +197,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _userCollectedData() {
-    return StreamBuilder<List<Post>>(
-      stream: DBService.instance.getMyPosts(_auth.user.uid),
+    return StreamBuilder<User>(
+      stream: DBService.instance.getUserData(_auth.user.uid),
       builder: (_context, _snapshot) {
-        var _userInfoData = _snapshot.data;
+        var _userData = _snapshot.data;
         if (!_snapshot.hasData) {
           return SpinKitFadingFour(
             size: 50.0,
@@ -214,9 +214,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              buildCountColumn("Bonfires", 0),
+              buildCountColumn("Bonfires", _userData.bonfires),
               buildCountColumn("Teams", 0),
-              buildCountColumn("Posts", _userInfoData.length),
+              buildCountColumn("Posts", _userData.posts),
               buildCountColumn("Rated", 0),
               //buildCountColumn("followers", 0),
             ],

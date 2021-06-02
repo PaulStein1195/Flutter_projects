@@ -281,12 +281,19 @@ class _TechnologyState extends State<Technology> {
                                         .setData({
                                       "type": "follow",
                                       "ownerId": _auth.user.uid,
-                                      "username": _auth.user?.uid,
-                                      "userId": _auth.user?.uid,
+                                      "username": currentUserId,
+                                      "userId": currentUserId,
                                       "number": bonfires.length,
                                       "isRead": false,
                                       "category": widget.bonfire,
                                       "timestamp": Timestamp.now(),
+                                    });
+                                    await Firestore.instance
+                                        .collection("Users")
+                                        .document(_auth.user.uid)
+                                        .updateData({
+                                      "bonfires":
+                                          FieldValue.increment(bonfires.length)
                                     });
                                     Navigator.push(
                                       context,

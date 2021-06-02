@@ -117,9 +117,8 @@ class _DisplayPostScreenState extends State<DisplayPostScreen> {
                             builder: (BuildContext context) {
                               _auth = Provider.of<AuthProvider>(context);
                               //TODO: Display title of bonfire (category) and the list of documents userIDs
-                              return StreamBuilder<User>(
-                                stream: DBService.instance
-                                    .isUserInTech(_auth.user.uid),
+                              return StreamBuilder<List<Post>>(
+                                stream: DBService.instance.getPostsInDB(),
                                 builder: (context, _snapshot) {
                                   var _data = _snapshot.data;
                                   if (!_snapshot.hasData) {
@@ -203,230 +202,306 @@ class _DisplayPostScreenState extends State<DisplayPostScreen> {
                                         ),
                                       ],
                                     );
+                                  } else if (_data.length == 0) {
+                                    /*return SpinKitFadingFour(
+                                      color: Colors.amber,
+                                      size: 50.0,
+                                    );*/
                                   }
-                                  return StreamBuilder<List<Post>>(
-                                    stream:
-                                        DBService.instance.getTimelinePosts(),
-                                    builder: (context, _snapshot) {
-                                      var _data = _snapshot.data;
-                                      if (!_snapshot.hasData) {
-                                        return Center(
-                                          child: SpinKitFadingFour(
-                                            size: 50.0,
-                                            color: kAmberColor,
+                                  return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 2.0),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "What's Happening",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 22,
+                                                    color: Colors.grey.shade300,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              FlatButton(
+                                                splashColor: Colors.white70,
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              WH_Screen()));
+                                                },
+                                                child: Text(
+                                                  "+ Show more",
+                                                  style: TextStyle(
+                                                      color: Color(0XFFF78C01),
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      }
-                                      return Column(
+                                        ),
+                                        Trends(
+                                          trendImage:
+                                              "https://picsum.photos/250?image=11",
+                                          title: "Drones",
+                                          description:
+                                              "Revolution in air transportation?",
+                                          time: "2:30 PM",
+                                          isLive: true,
+                                        ),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 2.0),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "You are going",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 22,
+                                                    color: Colors.grey.shade300,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              FlatButton(
+                                                splashColor: Colors.white70,
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              WH_Screen()));
+                                                },
+                                                child: Text(
+                                                  "+ Show more",
+                                                  style: TextStyle(
+                                                      color: Color(0XFFF78C01),
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Trends(
+                                            trendImage:
+                                                "https://picsum.photos/250?image=11",
+                                            title: "COVID-19",
+                                            description:
+                                                "Vaccination, PROS and CONS from Science and experience",
+                                            time: "5:00 PM",
+                                            icon: MyFlutterApp.share,
+                                            iconColor: Colors.white70,
+                                            isLive: false),
+                                        StreamBuilder<List<Post>>(
+                                            stream: DBService.instance
+                                                .getTechTimeline(),
+                                            builder: (context, _snapshot) {
+                                              var _data = _snapshot.data;
+                                              if (!_snapshot.hasData ||
+                                                  _data.length == 0) {
+                                                return SizedBox();
+                                              }
+
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 5.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20.0),
+                                                      child: Text(
+                                                        "Technology",
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontSize: 22,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    children: _data.toList(),
+                                                  )
+                                                ],
+                                              );
+                                            }),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        StreamBuilder<List<Post>>(
+                                            stream: DBService.instance
+                                                .getNatureTimeline(),
+                                            builder: (context, _snapshot) {
+                                              var _data = _snapshot.data;
+                                              if (!_snapshot.hasData ||
+                                                  _data.length == 0) {
+                                                return SizedBox();
+                                              }
+
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20.0),
+                                                      child: Text(
+                                                        "Nature",
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontSize: 22,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    children: _data.toList(),
+                                                  )
+                                                ],
+                                              );
+                                            }),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        StreamBuilder<List<Post>>(
+                                            stream: DBService.instance
+                                                .getHealthTimeline(),
+                                            builder: (context, _snapshot) {
+                                              var _data = _snapshot.data;
+                                              if (!_snapshot.hasData ||
+                                                  _data.length == 0) {
+                                                return SizedBox();
+                                              }
+
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20.0),
+                                                      child: Text(
+                                                        "Health",
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontSize: 22,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    children: _data.toList(),
+                                                  )
+                                                ],
+                                              );
+                                            }),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.end,
                                           children: [
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 2.0),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "What's Happening",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 22,
-                                                        color: Colors
-                                                            .grey.shade300,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                  FlatButton(
-                                                    splashColor: Colors.white70,
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (BuildContext
-                                                                      context) =>
-                                                                  WH_Screen()));
-                                                    },
-                                                    child: Text(
-                                                      "+ Show more",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0XFFF78C01),
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Trends(
-                                              trendImage:
-                                                  "https://picsum.photos/250?image=11",
-                                              title: "Drones",
-                                              description:
-                                                  "Revolution in air transportation?",
-                                              time: "2:30 PM",
-                                              isLive: true,
-                                            ),
-                                            SizedBox(
-                                              height: 20.0,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 2.0),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "You are going",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 22,
-                                                        color: Colors
-                                                            .grey.shade300,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                  FlatButton(
-                                                    splashColor: Colors.white70,
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (BuildContext
-                                                                      context) =>
-                                                                  WH_Screen()));
-                                                    },
-                                                    child: Text(
-                                                      "+ Show more",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0XFFF78C01),
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Trends(
-                                                trendImage:
-                                                    "https://picsum.photos/250?image=11",
-                                                title: "COVID-19",
-                                                description:
-                                                    "Vaccination, PROS and CONS from Science and experience",
-                                                time: "5:00 PM",
-                                                icon: MyFlutterApp.share,
-                                                iconColor: Colors.white70,
-                                                isLive: false),
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
-                                            SizedBox(
-                                              height: 20.0,
-                                            ),
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 8.0),
+                                                  left: 12.0),
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    top: 20.0),
+                                                    top: 30.0, bottom: 2.0),
                                                 child: Text(
-                                                  "Technology",
+                                                  "Suggested Bonfires",
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                       fontSize: 22,
-                                                      color: Colors.white,
+                                                      color:
+                                                          Colors.grey.shade300,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
                                               ),
                                             ),
-                                            Column(
-                                              children: _data.toList(),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 12.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 30.0,
-                                                            bottom: 2.0),
-                                                    child: Text(
-                                                      "Suggested Bonfires",
-                                                      textAlign: TextAlign.left,
-                                                      style: TextStyle(
-                                                          fontSize: 22,
-                                                          color: Colors
-                                                              .grey.shade300,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 5.0),
+                                              child: FlatButton(
+                                                onPressed: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        SelectBonfireScreen(),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 5.0),
-                                                  child: FlatButton(
-                                                    onPressed: () =>
-                                                        Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            SelectBonfireScreen(),
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      "+   See all",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0XFFF78C01),
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 15.0),
-                                                    ),
-                                                  ),
+                                                child: Text(
+                                                  "+   See all",
+                                                  style: TextStyle(
+                                                      color: Color(0XFFF78C01),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 15.0),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                            SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Scrollable_BF_Widget(),
-                                          ]);
-                                    },
-                                  );
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Scrollable_BF_Widget(),
+                                      ]);
                                 },
                               );
                             },

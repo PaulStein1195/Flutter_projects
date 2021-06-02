@@ -83,75 +83,85 @@ class _NatureState extends State<Nature> {
               actions: [
                 isUploading
                     ? Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: SpinKitCircle(
-                    color: Colors.orangeAccent,
-                    size: 30.0,
-                  ),
-                )
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: SpinKitCircle(
+                          color: Colors.orangeAccent,
+                          size: 30.0,
+                        ),
+                      )
                     : Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Material(
-                    color:
-                    Colors.orange.shade600, //Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    elevation: 3.0,
-                    child: MaterialButton(
-                      onPressed: isUploading
-                          ? null
-                          : () async {
-                        setState(() {
-                          isUploading = true;
-                        });
-                        //TODO: Create function that iterates over a loop of for(category of List then add user in that bonfire)
-                        for (var abonfire in bonfires) {
-                          print(abonfire);
-                          await DBService.instance.createBonfire(
-                              "Nature", bf_id, subColl, _auth.user.uid);
-                          //Update activity Feed and add it
-                        }
-                        await Firestore.instance
-                            .collection("FeedItems")
-                            .document(_auth.user.uid)
-                            .collection("feedItems")
-                            .document(bf_id)
-                            .setData({
-                          "type": "follow",
-                          "ownerId": _auth.user.uid,
-                          "username": currentUserId,
-                          "userId": currentUserId,
-                          "number": bonfires.length,
-                          "category": widget.bonfire,
-
-                          "isRead": false,
-                          "timestamp": Timestamp.now(),
-                        });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                HomeScreen(),
+                        padding: const EdgeInsets.all(6.0),
+                        child: Material(
+                          color: Colors
+                              .orange.shade600, //Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                          elevation: 3.0,
+                          child: MaterialButton(
+                            onPressed: isUploading
+                                ? null
+                                : () async {
+                                    setState(() {
+                                      isUploading = true;
+                                    });
+                                    //TODO: Create function that iterates over a loop of for(category of List then add user in that bonfire)
+                                    for (var abonfire in bonfires) {
+                                      print(abonfire);
+                                      await DBService.instance.createBonfire(
+                                          "Nature",
+                                          bf_id,
+                                          subColl,
+                                          _auth.user.uid);
+                                      //Update activity Feed and add it
+                                    }
+                                    await Firestore.instance
+                                        .collection("FeedItems")
+                                        .document(_auth.user.uid)
+                                        .collection("feedItems")
+                                        .document(bf_id)
+                                        .setData({
+                                      "type": "follow",
+                                      "ownerId": _auth.user.uid,
+                                      "username": currentUserId,
+                                      "userId": currentUserId,
+                                      "number": bonfires.length,
+                                      "category": widget.bonfire,
+                                      "isRead": false,
+                                      "timestamp": Timestamp.now(),
+                                    });
+                                    await Firestore.instance
+                                        .collection("Users")
+                                        .document(_auth.user.uid)
+                                        .updateData({
+                                      "bonfires":
+                                          FieldValue.increment(bonfires.length)
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeScreen(),
+                                      ),
+                                    );
+                                  },
+                            minWidth: 50.0,
+                            height: 30.0,
+                            child: Text(
+                              "DONE",
+                              style: TextStyle(
+                                  letterSpacing: 0.3,
+                                  fontSize: 16.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
                           ),
-                        );
-                      },
-                      minWidth: 50.0,
-                      height: 30.0,
-                      child: Text(
-                        "DONE",
-                        style: TextStyle(
-                            letterSpacing: 0.3,
-                            fontSize: 16.5,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
               ],
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,9 +189,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.guidedog,
                           data: dogs,
-                          color1: isDog == false
-                              ? Color(0XFFD3A01F)
-                              : Colors.grey,
+                          color1:
+                              isDog == false ? Color(0XFFD3A01F) : Colors.grey,
                           color2: isDog == false
                               ? Color(0XFFF7EC9C)
                               : Colors.blueGrey,
@@ -202,9 +211,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.cat,
                           data: "Cats",
-                          color1: isCat == false
-                              ? Color(0XFFD3A01F)
-                              : Colors.grey,
+                          color1:
+                              isCat == false ? Color(0XFFD3A01F) : Colors.grey,
                           color2: isCat == false
                               ? Color(0XFFF7EC9C)
                               : Colors.blueGrey,
@@ -225,9 +233,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.twitter_bird,
                           data: "Birds",
-                          color1: isBird == false
-                              ? Color(0XFFD3A01F)
-                              : Colors.grey,
+                          color1:
+                              isBird == false ? Color(0XFFD3A01F) : Colors.grey,
                           color2: isBird == false
                               ? Color(0XFFF7EC9C)
                               : Colors.blueGrey,
@@ -282,7 +289,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.leaf,
                           data: indoor,
-                          color1: isIndoor == false ? Colors.green : Colors.grey,
+                          color1:
+                              isIndoor == false ? Colors.green : Colors.grey,
                           color2: isIndoor == false
                               ? Colors.greenAccent
                               : Colors.blueGrey,
@@ -303,7 +311,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.tree_2,
                           data: outdoor,
-                          color1: isOutdoor == false ? Colors.green : Colors.grey,
+                          color1:
+                              isOutdoor == false ? Colors.green : Colors.grey,
                           color2: isOutdoor == false
                               ? Colors.greenAccent
                               : Colors.blueGrey,
@@ -324,7 +333,8 @@ class _NatureState extends State<Nature> {
                       child: BF_SubCateg_Widget(
                           icon: MyFlutterApp.garden,
                           data: gardening,
-                          color1: isGardening == false ? Colors.green : Colors.grey,
+                          color1:
+                              isGardening == false ? Colors.green : Colors.grey,
                           color2: isGardening == false
                               ? Colors.greenAccent
                               : Colors.blueGrey,
@@ -346,8 +356,9 @@ class _NatureState extends State<Nature> {
                           icon: MyFlutterApp.seedling,
                           data: diy,
                           color1: isDIY == false ? Colors.green : Colors.grey,
-                          color2:
-                          isDIY == false ? Colors.greenAccent : Colors.blueGrey,
+                          color2: isDIY == false
+                              ? Colors.greenAccent
+                              : Colors.blueGrey,
                           isSelected: isDIY),
                     ),
                     /*SizedBox(
@@ -517,7 +528,8 @@ class _NatureState extends State<Nature> {
                                     height: 60.0,
                                     width: 70.0,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100.0),
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -526,7 +538,8 @@ class _NatureState extends State<Nature> {
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   "assets/images/Yellow-Flame.png")),
-                                          borderRadius: BorderRadius.circular(100.0),
+                                          borderRadius:
+                                              BorderRadius.circular(100.0),
                                           /*image: DecorationImage(
                                                     image: AssetImage(
                                                         "assets/images/flame_icon1.png")),*/

@@ -4,6 +4,7 @@ import 'package:bonfire_newbonfire/home.dart';
 import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
 import 'package:bonfire_newbonfire/screens/Float_btn/create_post.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 import 'my_flutter_app_icons.dart';
-
 
 class ShareInBF extends StatefulWidget {
   const ShareInBF({Key key}) : super(key: key);
@@ -32,64 +32,89 @@ class _ShareInBFState extends State<ShareInBF> {
 
   final _formKey = new GlobalKey<FormState>();
 
-
   void updateInformation(String information) {
     setState(() => _information = information);
   }
 
   void moveToSecondPage() async {
-    final information = await     showDialog(
+    final information = await showDialog(
         context: (context),
         builder: (context) {
           return SimpleDialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                    Radius.circular(10.0))),
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
             backgroundColor: Color(0XFF333333),
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment:
-                  MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    showDialogContent(bonfire: "Drones", onTap: () {
-                      _pickCategory = "Drones";
-                      Navigator.pop(context, "Drones");
-                    }),
-
+                    showDialogContent(
+                      category: _pickCategory,
+                      bonfire: "Drones",
+                      onTap: () {
+                        _pickCategory = "Technology";
+                        _pickBonfire = "Drones";
+                        Navigator.pop(context, _pickBonfire);
+                      },
+                    ),
                     Divider(
                       color: Colors.white54,
                     ),
-                    showDialogContent(bonfire: "Software", onTap: (){
-                      _pickCategory = "Software";
-                      Navigator.pop(context, "Software");
-                    }),
-
+                    showDialogContent(
+                      category: "Technology",
+                      bonfire: "Software",
+                      onTap: () {
+                        _pickCategory = "Technology";
+                        _pickBonfire = "Software";
+                        Navigator.pop(context, _pickBonfire);
+                      },
+                    ),
                     Divider(
                       color: Colors.white54,
                     ),
-                    showDialogContent(bonfire: "Hardware", onTap: () {
-                      _pickCategory = "Hardware";
-                      Navigator.pop(context, "Hardware");
-                    }),
-
+                    showDialogContent(
+                      category: "Technology",
+                      bonfire: "Hardware",
+                      onTap: () {
+                        _pickCategory = "Technology";
+                        _pickBonfire = "Hardware";
+                        Navigator.pop(context, _pickBonfire);
+                      },
+                    ),
                     Divider(
                       color: Colors.white54,
                     ),
-                    showDialogContent(bonfire: "Drones", onTap: () {
-                      _pickCategory = "Drones";
-                      Navigator.pop(context, "Drones");
-                    }),
+                    showDialogContent(
+                      bonfire: "Climate Change",
+                      onTap: () {
+                        _pickCategory = "Nature";
+                        _pickBonfire = "Climate Change";
+                        Navigator.pop(context, _pickBonfire);
+                      },
+                    ),
                     Divider(
                       color: Colors.white54,
                     ),
-                    showDialogContent(bonfire: "HJ", onTap: () {
-                      _pickCategory = "HJ";
-                      Navigator.pop(context, "HJ");
-
-                    }),
-
+                    showDialogContent(
+                      bonfire: "Animals",
+                      onTap: () {
+                        _pickCategory = "Nature";
+                        _pickBonfire = "Animals";
+                        Navigator.pop(context, _pickBonfire);
+                      },
+                    ),
+                    Divider(
+                      color: Colors.white54,
+                    ),
+                    showDialogContent(
+                        bonfire: "Exercise",
+                        onTap: () {
+                          _pickCategory = "Health";
+                          _pickBonfire = "Exercise";
+                          Navigator.pop(context, _pickBonfire);
+                        }),
                   ],
                 ),
               ),
@@ -109,7 +134,6 @@ class _ShareInBFState extends State<ShareInBF> {
     updateInformation(information);
   }
 
-
   clearImage() {
     setState(() {
       file = null;
@@ -118,7 +142,7 @@ class _ShareInBFState extends State<ShareInBF> {
 
   Future<String> uploadImage(imageFile) async {
     StorageUploadTask uploadTask =
-    storageRef.child("post_$_postId.jpg").putFile(imageFile);
+        storageRef.child("post_$_postId.jpg").putFile(imageFile);
     StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
@@ -159,16 +183,16 @@ class _ShareInBFState extends State<ShareInBF> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0XFF333333),
-        appBar: AppBar(
-          elevation: 0.0,
-        ),
-        body: ChangeNotifierProvider<AuthProvider>.value(
+      backgroundColor: Color(0XFF333333),
+      appBar: AppBar(
+        elevation: 0.0,
+      ),
+      body: ChangeNotifierProvider<AuthProvider>.value(
           value: AuthProvider.instance,
           child: Builder(
-              builder: (BuildContext context) {
-                _auth = Provider.of<AuthProvider>(context);
-                return SingleChildScrollView(
+            builder: (BuildContext context) {
+              _auth = Provider.of<AuthProvider>(context);
+              return SingleChildScrollView(
                 child: Container(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -191,11 +215,9 @@ class _ShareInBFState extends State<ShareInBF> {
                 ),
               );
             },
-          )
-        ),
+          )),
     );
   }
-
 
   Widget _postItContentUI() {
     return Container(
@@ -233,7 +255,6 @@ class _ShareInBFState extends State<ShareInBF> {
                     child: MaterialButton(
                         onPressed: () {
                           moveToSecondPage();
-
                         },
                         minWidth: 60.0,
                         height: 50.0,
@@ -258,8 +279,13 @@ class _ShareInBFState extends State<ShareInBF> {
                           ],
                         )),
                   ),
-                  SizedBox(width: 30.0,),
-                  Text(_information, style: TextStyle(color: Colors.white, fontSize: 25.0),)
+                  SizedBox(
+                    width: 30.0,
+                  ),
+                  Text(
+                    _information,
+                    style: TextStyle(color: Colors.white, fontSize: 25.0),
+                  )
                 ],
               ),
               SizedBox(
@@ -302,6 +328,7 @@ class _ShareInBFState extends State<ShareInBF> {
       ),
     );
   }
+
   Widget _addContentDisplayUI() {
     return file == null ? Text("") : _contentSpace();
   }
@@ -317,14 +344,15 @@ class _ShareInBFState extends State<ShareInBF> {
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: FileImage(file),
-                )),
+              fit: BoxFit.cover,
+              image: FileImage(file),
+            )),
           ),
         ),
       ),
     );
   }
+
   Widget _smartContentSpace() {
     return Padding(
       padding: const EdgeInsets.only(top: 0.0, bottom: 25.0),
@@ -339,7 +367,8 @@ class _ShareInBFState extends State<ShareInBF> {
             SizedBox(
               width: 20.0,
             ),
-            _smartIcon(icon: MyFlutterApp.photo, onPressed: handleChooseFromGallery),
+            _smartIcon(
+                icon: MyFlutterApp.photo, onPressed: handleChooseFromGallery),
             SizedBox(
               width: 20.0,
             ),
@@ -364,26 +393,38 @@ class _ShareInBFState extends State<ShareInBF> {
               onPressed: isUploadingPost
                   ? null
                   : () async {
-                setState(() {
-                  isUploadingPost = true;
-                });
-                String _mediaUrl = await uploadImage(file);
-                if(_mediaUrl == null){
-                  _mediaUrl = "";
-                } else {
-                  DBService.instance.createPostInDB(_auth.user.uid, _postId,
-                      _image, _title, _description, _pickCategory, _pickBonfire, _mediaUrl);
-                  titleController.clear();
-                  descriptionController.clear();
-                  setState(() {
-                    _postId = Uuid().v4();
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => HomeScreen()));
-                }
-              },
+                      setState(() {
+                        isUploadingPost = true;
+                      });
+                      String _mediaUrl = await uploadImage(file);
+                      if (_mediaUrl == null) {
+                        _mediaUrl = "";
+                      } else {
+                        DBService.instance.createPostInDB(
+                            _auth.user.uid,
+                            _postId,
+                            _image,
+                            _title,
+                            _description,
+                            _pickCategory,
+                            _pickBonfire,
+                            _mediaUrl);
+                        titleController.clear();
+                        descriptionController.clear();
+                        setState(() {
+                          _postId = Uuid().v4();
+                        });
+                        await Firestore.instance
+                            .collection("Users")
+                            .document(_auth.user.uid)
+                            .updateData({"posts": FieldValue.increment(1)});
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    HomeScreen()));
+                      }
+                    },
             ),
     );
   }
@@ -409,12 +450,11 @@ class _ShareInBFState extends State<ShareInBF> {
     );
   }
 
-Widget showDialogContent({String bonfire, Function onTap}) {
+  Widget showDialogContent({String category, String bonfire, Function onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Row(
-        mainAxisAlignment:
-        MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             height: 40.0,
@@ -423,12 +463,13 @@ Widget showDialogContent({String bonfire, Function onTap}) {
               borderRadius: BorderRadius.circular(100.0),
               gradient: LinearGradient(colors: [
                 //Theme.of(context).accentColor,
-                Colors.blueAccent,
+                _pickCategory == "Technology"
+                    ? Colors.blueAccent
+                    : _pickCategory == "Nature"
+                        ? Colors.green
+                        : Colors.orange,
                 Colors.lightBlueAccent
-              ],
-                  begin: Alignment.topLeft, end: Alignment.bottomLeft
-
-              ),
+              ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
               color: Colors.white, //Theme.of(context).accentColor,
             ),
             child: Padding(
@@ -436,13 +477,10 @@ Widget showDialogContent({String bonfire, Function onTap}) {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.0),
-                  gradient: LinearGradient(colors: [
-                    Colors.blueAccent,
-                    Colors.lightBlueAccent
-                  ],
-                      begin: Alignment.topLeft, end: Alignment.bottomLeft
-
-                  ),
+                  gradient: LinearGradient(
+                      colors: [Colors.blueAccent, Colors.lightBlueAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomLeft),
                   image: DecorationImage(
                       image: AssetImage("assets/images/flame_icon1.png")),
                   color: Colors.white70, //Theme.of(context).accentColor,
@@ -455,14 +493,12 @@ Widget showDialogContent({String bonfire, Function onTap}) {
           ),
           Text(
             bonfire,
-            style: TextStyle(
-                color: Colors.white70,
-                fontSize: 17.0),
+            style: TextStyle(color: Colors.white70, fontSize: 17.0),
           )
         ],
       ),
     );
-}
+  }
 
   Widget _titleTextField() {
     return Padding(

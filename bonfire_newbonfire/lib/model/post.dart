@@ -500,7 +500,7 @@ class _PostState extends State<Post> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
-                              color: Colors.blue,
+                              color: category == "Technology" ? Colors.blue: category == "Nature" ? Colors.green: category == "Health" ? Colors.amber.shade700: category == "Arts" ? Colors.red: Colors.white70,
                               border: Border.all(color: Color(0XFF333333))
                             ),
                             child: Padding(
@@ -510,13 +510,13 @@ class _PostState extends State<Post> {
                                   left: 12.0,
                                   right: 12.0),
                               child: Text(
-                                category,
+                                bonfire,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   letterSpacing: 1.0,
                                   fontSize: 15.5,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white70,
+                                  color: Colors.grey.shade100,
                                   //    color: Colors.grey.shade100
                                 ),
                               ),
@@ -526,7 +526,7 @@ class _PostState extends State<Post> {
                       ],
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: 15.0,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 7.0),
