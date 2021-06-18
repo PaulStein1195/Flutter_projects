@@ -1,8 +1,8 @@
+import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/screens/Access/welcome.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -29,13 +29,12 @@ class StartState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kMainBoxColor,
       body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Hero(
-            tag: "logo",
-            child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
               height: 170.0,
               width: 175,
               decoration: BoxDecoration(
@@ -45,13 +44,13 @@ class StartState extends State<SplashScreen> {
                 ),
               ),
             ),
-          ),
-          SpinKitFadingFour(
-            size: 100.0,
-            color: Colors.orange,
-          )
-        ],
-      )),
+            CircularProgressIndicator(
+              color: Colors.orange,
+              strokeWidth: 3.0,
+            )
+          ],
+        ),
+      ),
     );
   }
 }

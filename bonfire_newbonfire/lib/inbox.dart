@@ -12,8 +12,8 @@ class _InboxScreenState extends State<InboxScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
         appBar: AppBar(
+          backgroundColor: kFirstAppbarColor,
           centerTitle: true,
           title: Text(
             "Inbox",

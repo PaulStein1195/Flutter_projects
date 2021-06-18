@@ -1,6 +1,8 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/screens/Float_btn/create_post.dart';
+import 'package:bonfire_newbonfire/screens/Home/calendar.dart';
+import 'package:bonfire_newbonfire/screens/Home/homepage(test).dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/service/navigation_service.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: NavigationService.instance.navigatorKey,
         theme: ThemeData(
-          brightness: Brightness.dark,
+            brightness: Brightness.dark,
             primaryColor: Color(0XFF333333),
             accentColor: Color(0XFFffb21a),
             scaffoldBackgroundColor: kFirstBackgroundColor,
@@ -41,9 +43,10 @@ class MyApp extends StatelessWidget {
           "register": (BuildContext _context) => Register2Screen(),
           "welcome": (BuildContext _context) => WelcomeScreen(),
           "home": (BuildContext _context) => HomeScreen(),
-          "timeline": (BuildContext _context) => DisplayPostScreen(),
+          "timeline": (BuildContext _context) => HomepageScreen(),
           "email_verification": (BuildContext _context) =>
               EmailVerificationScreen(),
+          "calendar": (BuildContext _context) => CalendarScreen(),
           "profile": (BuildContext _context) => ProfileScreen(),
           "edit_profile": (BuildContext _context) => EditProfile(),
           "create_post": (BuildContext _context) => CreatePostScreen(),

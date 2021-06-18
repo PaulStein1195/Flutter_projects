@@ -54,30 +54,35 @@ class Trends extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: Icon(
-                                  MyFlutterApp.calendar,
-                                  size: 22.0,
-                                  color: Colors.grey.shade100,
+                      GestureDetector(
+                        onTap: () {
+                          print("Open calendar");
+                        },
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 2.0),
+                                  child: Icon(
+                                    MyFlutterApp.calendar,
+                                    size: 22.0,
+                                    color: Colors.grey.shade100,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                time,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.grey.shade400,
+                                Text(
+                                  time,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.grey.shade400,
+                                  ),
                                 ),
-                              ),
-                              // Text("5:00 PM", style: TextStyle(fontSize: 20.0, color: Colors.white),)
-                            ],
+                                // Text("5:00 PM", style: TextStyle(fontSize: 20.0, color: Colors.white),)
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -102,7 +107,7 @@ class Trends extends StatelessWidget {
                               description,
                               style: TextStyle(
                                   color: Colors.grey.shade400,
-                                  fontSize: 15,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.w700),
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
@@ -131,7 +136,7 @@ class Trends extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                       child: Text(
                                         "LIVE",
-                                        style: TextStyle(color: Colors.grey.shade200, fontSize: 15.0, fontWeight: FontWeight.w800),
+                                        style: TextStyle(color: Colors.grey.shade200, fontSize: 14.0, fontWeight: FontWeight.w800),
                                       ),
                                     ),
                                   ),
@@ -148,30 +153,9 @@ class Trends extends StatelessWidget {
                           color: Colors.white70,
                           size: 22.0,
                         ) : Text(""),
-                        /*Container(
-                          height: 30.0,
-                          width: 80.0,
-                          child: Material(
-                            color: Color(0XFFffb21a),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                            child: MaterialButton(
-                              elevation: 5.0,
-                              onPressed: () {},
-                              child: Text(
-                                "JOIN",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.0),
-                              ),
-                            ),
-                          ),
-                        ),*/
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -1,11 +1,10 @@
 import "dart:io";
 import 'package:bonfire_newbonfire/service/cloud_storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
-import 'package:bonfire_newbonfire/screens/display_post_page.dart';
+import 'package:bonfire_newbonfire/screens/Home/display_post_page.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:provider/provider.dart';
 
@@ -91,8 +90,7 @@ class _EditProfileState extends State<EditProfile> {
       key: _scaffoldKey,
       appBar: kAppbar(context),
       body: isLoading
-          ? SpinKitFadingFour(
-              size: 50.0,
+          ? CircularProgressIndicator(
               color: kAmberColor,
             )
           : ChangeNotifierProvider<AuthProvider>.value(
@@ -108,8 +106,7 @@ class _EditProfileState extends State<EditProfile> {
                         return Padding(
                           padding: const EdgeInsets.only(top: 30.0),
                           child: Center(
-                            child: SpinKitFadingFour(
-                              size: 50.0,
+                            child: CircularProgressIndicator(
                               color: kAmberColor,
                             ),
                           ),

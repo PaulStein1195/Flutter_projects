@@ -55,6 +55,7 @@ Widget BonfireCategory(String _bf_name, Color color1, Color color2) {
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
               child: Row(
                 children: [
+                  /*
                   Container(
                     height: 42.0,
                     width: 42.0,
@@ -87,7 +88,7 @@ Widget BonfireCategory(String _bf_name, Color color1, Color color2) {
                   ),
                   SizedBox(
                     width: 8.0,
-                  ),
+                  ),*/
                   Text(
                     "$_bf_name",
                     style: TextStyle(color: Colors.grey.shade300, fontSize: 16),

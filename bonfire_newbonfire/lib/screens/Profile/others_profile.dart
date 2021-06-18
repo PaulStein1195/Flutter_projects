@@ -1,9 +1,7 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
-import 'package:bonfire_newbonfire/screens/Profile/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:bonfire_newbonfire/model/post.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
@@ -67,8 +65,7 @@ class _OthersProfileState extends State<OthersProfile> {
               return Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Center(
-                  child: SpinKitFadingFour(
-                    size: 50.0,
+                  child: CircularProgressIndicator(
                     color: kAmberColor,
                   ),
                 ),
@@ -213,8 +210,7 @@ class _OthersProfileState extends State<OthersProfile> {
       builder: (_context, _snapshot) {
         var _userInfoData = _snapshot.data;
         if (!_snapshot.hasData) {
-          return SpinKitFadingFour(
-            size: 50.0,
+          return CircularProgressIndicator(
             color: kAmberColor,
           );
         }

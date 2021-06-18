@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -316,9 +315,8 @@ class _PostState extends State<Post> {
             var _data = _snapshot.data;
             print(_snapshot.data);
             if (!_snapshot.hasData) {
-              return SpinKitCircle(
+              return CircularProgressIndicator(
                 color: Colors.lightBlueAccent,
-                size: 50.0,
               );
             }
             bool isPostOwner = currentUserId == ownerId;
@@ -343,9 +341,8 @@ class _PostState extends State<Post> {
                           var _data = _snapshot.data;
                           print(_snapshot.data);
                           if (!_snapshot.hasData) {
-                            return SpinKitCircle(
+                            return CircularProgressIndicator(
                               color: Colors.lightBlueAccent,
-                              size: 50.0,
                             );
                           }
                           bool isPostOwner = _auth.user.uid == ownerId;
@@ -356,8 +353,8 @@ class _PostState extends State<Post> {
                                 onTap: () =>
                                     showProfile(context, profileId: _data.uid),
                                 child: Container(
-                                  width: 55,
-                                  height: 55,
+                                  width: 45,
+                                  height: 45,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.white70, width: 2.0),
@@ -369,21 +366,6 @@ class _PostState extends State<Post> {
                                           : NetworkImage(_data.profileImage),
                                     ),
                                   ),
-                                  child: _data.profileImage != null
-                                      ? Center(
-                                          child: GestureDetector(
-                                            onTap: () => showProfile(context,
-                                                profileId: _data.uid),
-                                            child: Text(
-                                              _data.name[0],
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ),
-                                        )
-                                      : Text(""),
                                 ),
                               ),
                               title: Text(
@@ -447,14 +429,20 @@ class _PostState extends State<Post> {
                                                     onPressed: () {
                                                       //TODO: get link and share
                                                     },
-                                                    child: Text(
-                                                      "Share",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 20.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(MyFlutterApp.share, color: Colors.white70,),
+                                                        SizedBox(width: 20.0,),
+                                                        Text(
+                                                          "Share",
+                                                          style: TextStyle(
+                                                              color: Colors.white70,
+                                                              fontSize: 18.0,
+                                                              fontWeight:
+                                                              FontWeight.w600),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ),
                                                   SimpleDialogOption(
                                                     onPressed: () async {
@@ -464,14 +452,21 @@ class _PostState extends State<Post> {
                                                               postId);
                                                       Navigator.pop(context);
                                                     },
-                                                    child: Text(
-                                                      "Delete",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 20.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(MyFlutterApp.trash, color: Colors.white70,),
+                                                        SizedBox(width: 20.0,),
+                                                        Text(
+                                                          "Delete",
+                                                          style: TextStyle(
+                                                              color: Colors.white70,
+                                                              fontSize: 18.0,
+                                                              fontWeight:
+                                                              FontWeight.w600),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ),
                                                   SimpleDialogOption(
                                                     onPressed: () {
@@ -481,7 +476,7 @@ class _PostState extends State<Post> {
                                                       Icons.arrow_back,
                                                       color:
                                                           Colors.grey.shade100,
-                                                      size: 30.0,
+                                                      size: 25.0,
                                                     ),
                                                   ),
                                                 ],
@@ -492,7 +487,7 @@ class _PostState extends State<Post> {
                                     )
                                   : Text(""));
                         }),
-                    Row(
+                    /*Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
@@ -527,7 +522,7 @@ class _PostState extends State<Post> {
                     ),
                     SizedBox(
                       height: 15.0,
-                    ),
+                    ),*/
                     Padding(
                       padding: const EdgeInsets.only(left: 7.0),
                       child: Text(
@@ -591,7 +586,7 @@ class _PostState extends State<Post> {
                                       MyFlutterApp.thumbs_up,
                                       size: 28.0,
                                       color:
-                                          isLiked ? Colors.green : Colors.grey,
+                                          isLiked ? Colors.orange : Colors.grey,
                                     ),
                                     /*onPressed: () {
                                         handleLikePost();
@@ -605,7 +600,7 @@ class _PostState extends State<Post> {
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: isLiked
-                                            ? Colors.green
+                                            ? Colors.orange
                                             : Colors.grey.shade200,
                                       ),
                                     ),
@@ -649,20 +644,20 @@ class _PostState extends State<Post> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 2.0),
                                 child: CircularPercentIndicator(
-                                    radius: 85.0,
-                                    lineWidth: 8.0,
+                                    radius: 75.0,
+                                    lineWidth: 6.5,
                                     animation: true,
                                     percent: votePercentage,
                                     //0.5,
                                     center: new Text(
                                       "$votePercentageTextInt %",
                                       style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
                                           fontSize: 17.5), //"50 %",
                                     ),
                                     circularStrokeCap: CircularStrokeCap.round,
-                                    progressColor: Colors.green.shade400,
+                                    progressColor: Colors.orange,
                                     backgroundColor: Colors.grey.shade100),
                               ),
                             ],
@@ -699,9 +694,8 @@ class _PostState extends State<Post> {
                                       builder: (context, _snapshot) {
                                         var _data = _snapshot.data;
                                         if (!_snapshot.hasData) {
-                                          return SpinKitCircle(
+                                          return CircularProgressIndicator(
                                             color: Colors.lightBlueAccent,
-                                            size: 50.0,
                                           );
                                         }
                                         return Text(

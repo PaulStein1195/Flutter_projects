@@ -2,7 +2,6 @@ import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
 import 'package:bonfire_newbonfire/widget/scrollable_bf_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChooseBonfireScreen extends StatefulWidget {
   @override
@@ -41,11 +40,11 @@ class _ChooseBonfireScreenState extends State<ChooseBonfireScreen> {
               Expanded(child: Scrollable_BF_Widget()),
               BonfireName("Photography", MyFlutterApp.camera_1, Colors.purple),
               Expanded(child: Scrollable_BF_Widget()),
-              BonfireName("Animals", FontAwesomeIcons.dog, Colors.green),
+              BonfireName("Animals", MyFlutterApp.guidedog, Colors.green),
               Expanded(child: Scrollable_BF_Widget()),
               BonfireName("Music", MyFlutterApp.music, Colors.purple),
               Expanded(child: Scrollable_BF_Widget()),
-              BonfireName("Education", FontAwesomeIcons.graduationCap, Colors.blue),
+              BonfireName("Education", MyFlutterApp.graduation_cap, Colors.blue),
               Expanded(child: Scrollable_BF_Widget()),
             ],
           ),

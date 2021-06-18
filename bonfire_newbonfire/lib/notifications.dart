@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -46,7 +45,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   var _data = snapshot.data;
                   print("value data " + _data.toString());
 
-                  if (_data.length == 0 || _data == null) {
+                  if (_data.isEmpty) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -110,17 +109,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             onPressed: () => Navigator.pop(context))
                       ],
                     );
-                  } else if (!snapshot.hasData) {
+                  } else if (snapshot.data == null) {
                     return Center(
-                      child: SpinKitFadingFour(
-                        size: 50.0,
+                      child: CircularProgressIndicator(
                         color: kAmberColor,
                       ),
                     );
                   }
-                  return ListView(
-                    children: snapshot.data,
-                  );
+                  else {
+                    return ListView(
+                      children: snapshot.data,
+                    );
+                  }
                 },
               ),
             ));

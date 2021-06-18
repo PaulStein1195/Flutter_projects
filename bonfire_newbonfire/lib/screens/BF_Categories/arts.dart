@@ -4,8 +4,6 @@ import 'package:bonfire_newbonfire/screens/BF_Categories/select_bonfires_screen.
 import 'package:bonfire_newbonfire/widget/bf_subcateg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import '../../../home.dart';
 import '../../../my_flutter_app_icons.dart';
 
@@ -60,8 +58,7 @@ class BonfireCategoriesState extends State<BF_Arts> {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return Center(
-                          child: SpinKitFadingFour(
-                            size: 50.0,
+                          child: CircularProgressIndicator(
                             color: kAmberColor,
                           ),
                         );

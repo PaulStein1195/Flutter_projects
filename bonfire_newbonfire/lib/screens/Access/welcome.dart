@@ -1,3 +1,4 @@
+import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: kMainBoxColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: ChangeNotifierProvider<AuthProvider>.value(

@@ -3,7 +3,6 @@ import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 AuthProvider _auth;
@@ -36,8 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 30.0),
                     child: Center(
-                      child: SpinKitFadingFour(
-                        size: 50.0,
+                      child: CircularProgressIndicator(
                         color: kAmberColor,
                       ),
                     ),

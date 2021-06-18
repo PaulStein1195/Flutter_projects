@@ -1,5 +1,5 @@
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
-import 'package:bonfire_newbonfire/test/meeting_screen.dart';
+import 'package:bonfire_newbonfire/test/rtc_room.dart';
 import 'package:flutter/material.dart';
 
 class Trends_Detailed extends StatelessWidget {
@@ -61,14 +61,14 @@ class Trends_Detailed extends StatelessWidget {
                               Text(
                                 title,
                                 style: TextStyle(
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 20.0),
                               ),
                               Text(
                                 score,
                                 style: TextStyle(
-                                    color: Theme.of(context).accentColor,
+                                    color: Colors.white70,
                                     fontSize: 17,
                                     fontWeight: FontWeight.w700),
                               ),
@@ -137,7 +137,7 @@ class Trends_Detailed extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          MeetingScreen()));
+                                          RTCRoomScreen(title: title)));
                             },
                             child: Text(
                               "JOIN",

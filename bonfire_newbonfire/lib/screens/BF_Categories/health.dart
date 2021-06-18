@@ -4,9 +4,7 @@ import 'package:bonfire_newbonfire/widget/bf_subcateg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../my_flutter_app_icons.dart';
 import '../../../home.dart';
 
@@ -108,9 +106,8 @@ class _HealthState extends State<Health> {
                   isUploading
                       ? Padding(
                     padding: const EdgeInsets.only(left: 12.0),
-                    child: SpinKitCircle(
+                    child: CircularProgressIndicator(
                       color: Colors.orangeAccent,
-                      size: 30.0,
                     ),
                   )
                       : Padding(

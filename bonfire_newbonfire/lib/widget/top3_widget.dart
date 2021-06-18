@@ -4,7 +4,6 @@ import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -46,9 +45,8 @@ class _WHWidgetState extends State<WHWidget> {
               var _data = _snapshot.data;
               print(_snapshot.data);
               if (!_snapshot.hasData) {
-                return SpinKitCircle(
+                return CircularProgressIndicator(
                   color: Colors.lightBlueAccent,
-                  size: 50.0,
                 );
               }
               if(_data.length == 0) {
@@ -68,9 +66,8 @@ class _WHWidgetState extends State<WHWidget> {
                               future: userRef.document(_auth.user.uid).get(),
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
-                                  return SpinKitCircle(
+                                  return CircularProgressIndicator(
                                     color: Colors.lightBlueAccent,
-                                    size: 50.0,
                                   );
                                 }
                                 User user = User.fromDocument(snapshot.data);

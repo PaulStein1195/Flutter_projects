@@ -4,8 +4,7 @@ import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -45,7 +44,7 @@ class CommentsState extends State<Comments> {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return SpinKitCircle();
+          return CircularProgressIndicator();
         }
         List<Comment> comments = [];
         snapshot.data.documents.forEach((doc) {
@@ -61,13 +60,13 @@ class CommentsState extends State<Comments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(41, 39, 40, 180.0),
       appBar: kAppbar(context),
       body: Column(
         children: [
           Expanded(
             child: buildComments(),
           ),
-          Divider(),
           ChangeNotifierProvider<AuthProvider>.value(
             value: AuthProvider.instance,
             child: Builder(
@@ -78,64 +77,107 @@ class CommentsState extends State<Comments> {
                   builder: (context, _snapshot) {
                     var _data = _snapshot.data;
                     if (!_snapshot.hasData) {
-                      return SpinKitCircle(
-                        color: Colors.lightBlueAccent,
-                        size: 50.0,
-                      );
-                    }
-                    return ListTile(
-                      title: TextFormField(
-                        style: TextStyle(color: Colors.white70),
-                        controller: commentController,
-                        decoration: InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(8.0),
-                              ),
-                              borderSide: new BorderSide(
-                                color: Theme.of(context).accentColor,
-                                width: 1.0,
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
+                        child: ListTile(
+                            title: Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0XFF333333),
+                                  borderRadius: BorderRadius.circular(30.0)),
+                              child: TextFormField(
+                                style: TextStyle(color: Colors.white70),
+                                controller: commentController,
+                                decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                  ),
+                                  //labelText: "Write your comment...",
+                                  labelStyle: TextStyle(color: Colors.white70),
+                                ), //Theme.of(context).accentColor)),
                               ),
                             ),
-                            labelText: "Write your comment...",
-                            labelStyle: TextStyle(
-                                color: Theme.of(context).accentColor)),
-                      ),
-                      trailing: RaisedButton(
-                          onPressed: () {
-                            Firestore.instance
-                                .collection("Message")
-                                .document(postId)
-                                .collection("postMsg")
-                                .add({
-                              "username": _data.name,
-                              "comment": commentController.text,
-                              "timestamp": Timestamp.now(),
-                              "avatarUrl": _data.profileImage,
-                              "userId": _data.uid,
-                            });
-                            bool isNotPostOwner = postOwnerId == _data.uid;
-                            if (isNotPostOwner ){
-                              Firestore.instance.collection("Notifications").document(postOwnerId)
-                                  .collection("notificationsItems")
+                            trailing: GestureDetector(
+                              onTap: () {
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  color: Colors.orange,
+
+                                ),
+                                height: 80.0,
+                                width: 80.0,
+                                child: Center(child: Text("SEND")),
+                              ),
+                            )),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                      child: ListTile(
+                          title: Container(
+                            decoration: BoxDecoration(
+                                color: Color(0XFF333333),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: TextFormField(
+                              style: TextStyle(color: Colors.white70),
+                              controller: commentController,
+                              decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(30.0),
+                                  ),
+                                ),
+                                labelText: "Write your comment...",
+                                labelStyle: TextStyle(color: Colors.white70),
+                              ), //Theme.of(context).accentColor)),
+                            ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              Firestore.instance
+                                  .collection("Message")
+                                  .document(postId)
+                                  .collection("postMsg")
                                   .add({
-                                "type": "comment",
-                                "commentData": commentController.text,
-                                "timestamp": Timestamp.now(),
-                                "postId": postId,
-                                "userId": _data.uid,
                                 "username": _data.name,
-                                "userProfileImage": _data.profileImage,
-                                //"mediaUrl": postMediaUrl
+                                "comment": commentController.text,
+                                "timestamp": Timestamp.now(),
+                                "avatarUrl": _data.profileImage,
+                                "userId": _data.uid,
+                                //"ownerId": _auth.user.uid
                               });
-                            }
-                            commentController.clear();
-                          },
-                          color: Theme.of(context).accentColor,
-                          child: FaIcon(
-                            FontAwesomeIcons.paperPlane,
-                            size: 25.0,
-                            color: Colors.grey.shade50,
+                              bool isNotPostOwner = postOwnerId == _data.uid;
+                              if (isNotPostOwner) {
+                                Firestore.instance
+                                    .collection("Notifications")
+                                    .document(postOwnerId)
+                                    .collection("notificationsItems")
+                                    .add({
+                                  "type": "comment",
+                                  "commentData": commentController.text,
+                                  "timestamp": Timestamp.now(),
+                                  "postId": postId,
+                                  "userId": _data.uid,
+                                  "username": _data.name,
+                                  "userProfileImage": _data.profileImage,
+                                  //"mediaUrl": postMediaUrl
+                                });
+                              }
+                              commentController.clear();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Colors.orange,
+
+                              ),
+                              height: 80.0,
+                              width: 80.0,
+                              child: Center(child: Text("SEND")),
+                            ),
                           )),
                     );
                   },
@@ -178,15 +220,30 @@ class Comment extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Material(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30.0),
-          bottomLeft: Radius.circular(30.0),
-          bottomRight: Radius.circular(30.0),
-        ),
-        color: Color(0XFF333333),
+        borderRadius: userId == _auth.user.uid
+            ? BorderRadius.only(
+                topRight: Radius.circular(20.0),
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              )
+            : BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              ),
+        color: userId == _auth.user.uid ? Colors.orange : Color(0XFF333333),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(avatarUrl),
+            //backgroundImage: NetworkImage(avatarUrl),
+            backgroundColor: Color.fromRGBO(41, 39, 40, 50.0),
+            child: Center(
+                child: Text(
+              username[0],
+              style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700),
+            )),
           ),
           title: Text(
             comment,
@@ -204,7 +261,6 @@ class Comment extends StatelessWidget {
     );
   }
 }
-
 
 /*
 class Comments extends StatefulWidget {

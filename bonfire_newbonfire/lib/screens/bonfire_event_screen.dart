@@ -1,4 +1,5 @@
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
+import 'package:bonfire_newbonfire/test/rtc_room.dart';
 import 'package:flutter/material.dart';
 
 class BonfireEvent extends StatefulWidget {
@@ -290,7 +291,13 @@ class _BonfireEventState extends State<BonfireEvent> {
                                         BorderRadius.all(Radius.circular(20.0)),
                                     elevation: 1.0,
                                     child: MaterialButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    RTCRoomScreen(title: this.title)));
+                                      },
                                       minWidth: 180.0,
                                       height: 42.0,
                                       child: Text(

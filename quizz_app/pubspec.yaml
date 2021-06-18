@@ -19,13 +19,13 @@ dependencies:
 
   #GOOGLE SERVICES
   #FIREBASE
-  firebase_core: "0.4.4+3"
-  firebase_analytics: "5.0.11"
-  firebase_auth: "0.15.4"
-  firebase_storage: "3.1.1"
-  cloud_firestore: "0.13.4+2"
+  firebase_core:
+  firebase_analytics:
+  firebase_auth:
+  firebase_storage:
+  cloud_firestore:
   #GOOGLE SIGN IN
-  google_sign_in: ^4.4.4
+  google_sign_in:
 
 dev_dependencies:
   flutter_test:

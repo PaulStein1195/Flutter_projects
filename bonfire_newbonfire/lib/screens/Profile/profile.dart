@@ -3,8 +3,6 @@ import 'package:bonfire_newbonfire/screens/Profile/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:bonfire_newbonfire/model/post.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
@@ -43,7 +41,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SettingsScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => SettingsScreen()));
                 },
                 icon: Icon(MyFlutterApp.cog_1, size: 25.0),
                 color: Colors.white, //kBottomNavigationBar,
@@ -80,8 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Center(
-                  child: SpinKitFadingFour(
-                    size: 50.0,
+                  child: CircularProgressIndicator(
                     color: kAmberColor,
                   ),
                 ),
@@ -93,6 +93,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _userData.profileImage, _userData.bio),
                   _userCollectedData(),
                   Divider(color: Colors.white70),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      /*gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Colors.deepOrange,
+                          Colors.orange,
+                          Theme.of(context).accentColor
+                        ],
+                      ),*/
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 2.5),
+                      child: Row(
+                        children: [
+                          Icon(
+                            MyFlutterApp.pie_chart,
+                            size: 25.0,
+                            color: Colors.grey.shade100,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            "Games",
+                            style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.0,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      /*gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Colors.deepOrange,
+                          Colors.orange,
+                          Theme.of(context).accentColor
+                        ],
+                      ),*/
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 2.5),
+                      child: Row(
+                        children: [
+                          Icon(
+                            MyFlutterApp.lightbulb,
+                            size: 25.0,
+                            color: Colors.grey.shade100,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            "Tools",
+                            style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               );
             }
@@ -123,22 +201,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.white70, width: 2.0),
                       borderRadius: BorderRadius.circular(50.0),
-                      //color: Color.fromRGBO(41, 39, 40, 150.0),
-                      /*gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          kAmberColor,
-                          Colors.red,
-                        ],
-                      ),*/
-                      /*image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: _image != ""
-                              ? NetworkImage(_image)
-                              : AssetImage("assets/images/flame_icon1.png")),*/
                     ),
-                    child: Center(child: Text(_name[0], style: TextStyle(color: Colors.white70, fontSize: 35.0, fontWeight: FontWeight.w700),)),
+                    child: Center(
+                      child: Text(
+                        _name[0],
+                        style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
                   ),
                 ),
                 Column(
@@ -162,8 +234,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-                SizedBox(width: 30.0,),
-                Icon(MyFlutterApp.pencil, color: Colors.white,),
+                SizedBox(
+                  width: 30.0,
+                ),
+                Icon(
+                  MyFlutterApp.pencil,
+                  color: Colors.white,
+                ),
               ],
             ),
             Padding(
@@ -202,8 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (_context, _snapshot) {
         var _userData = _snapshot.data;
         if (!_snapshot.hasData) {
-          return SpinKitFadingFour(
-            size: 50.0,
+          return CircularProgressIndicator(
             color: kAmberColor,
           );
         }
@@ -251,74 +327,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-/*GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(MyFlutterApp.history,
-                              size: 20.0,
-                              color: Colors.black54 //kBottomNavigationBar,
-                              ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "My Summary",
-                              style: TextStyle(fontSize: 16.5),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Divider(color: Colors.black),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        if (notificationOff == false) {
-                          notificationOff = true;
-                        } else {
-                          notificationOff = false;
-                        }
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                              notificationOff
-                                  ? MyFlutterApp.lock
-                                  : MyFlutterApp.lock,
-                              size: 20.0,
-                              color: Colors.black54 //kBottomNavigationBar,
-                              ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "Notifications",
-                              style: TextStyle(fontSize: 16.5),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 100.0),
-                            child: Text(
-                              notificationOff ? "OFF" : "ON",
-                              style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.grey.shade700),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/

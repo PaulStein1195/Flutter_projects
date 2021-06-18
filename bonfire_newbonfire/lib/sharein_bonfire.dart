@@ -51,7 +51,7 @@ class _ShareInBFState extends State<ShareInBF> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     showDialogContent(
-                      category: _pickCategory,
+                      category: "Technology",
                       bonfire: "Drones",
                       onTap: () {
                         _pickCategory = "Technology";
@@ -87,6 +87,7 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(
+                      category: "Nature",
                       bonfire: "Climate Change",
                       onTap: () {
                         _pickCategory = "Nature";
@@ -98,6 +99,7 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(
+                      category: "Nature",
                       bonfire: "Animals",
                       onTap: () {
                         _pickCategory = "Nature";
@@ -109,6 +111,7 @@ class _ShareInBFState extends State<ShareInBF> {
                       color: Colors.white54,
                     ),
                     showDialogContent(
+                        category: "Health",
                         bonfire: "Exercise",
                         onTap: () {
                           _pickCategory = "Health";
@@ -461,29 +464,22 @@ class _ShareInBFState extends State<ShareInBF> {
             width: 40.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100.0),
-              gradient: LinearGradient(colors: [
-                //Theme.of(context).accentColor,
-                _pickCategory == "Technology"
-                    ? Colors.blueAccent
-                    : _pickCategory == "Nature"
-                        ? Colors.green
-                        : Colors.orange,
-                Colors.lightBlueAccent
-              ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
-              color: Colors.white, //Theme.of(context).accentColor,
+              color: category == "Technology"
+                  ? Colors.blue
+                  : category == "Nature"
+                      ? Colors.green
+                      : category == "Health"
+                          ? Colors.orange
+                          : Color(0XFF333333), //Theme.of(context).accentColor,
             ),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.0),
-                  gradient: LinearGradient(
-                      colors: [Colors.blueAccent, Colors.lightBlueAccent],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomLeft),
                   image: DecorationImage(
                       image: AssetImage("assets/images/flame_icon1.png")),
-                  color: Colors.white70, //Theme.of(context).accentColor,
+                  color: category == "Technology" ? Colors.blue : category == "Nature" ? Colors.green : category == "Health" ? Colors.orange : Color(0XFF333333), //Theme.of(context).accentColor,
                 ),
               ),
             ),

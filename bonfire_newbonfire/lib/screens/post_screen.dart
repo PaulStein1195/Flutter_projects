@@ -2,7 +2,6 @@ import 'package:bonfire_newbonfire/model/post.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PostScreen extends StatelessWidget {
   final String userId;
@@ -17,7 +16,7 @@ class PostScreen extends StatelessWidget {
       future: Firestore.instance.document(userId).collection("userPosts").document(postId).get(),
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
-          return SpinKitCircle(
+          return CircularProgressIndicator(
             color: Theme.of(context).accentColor,
           );
         }

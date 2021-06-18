@@ -2,7 +2,6 @@
 import 'package:bonfire_newbonfire/widget/start_categories.dart';
 import 'package:bonfire_newbonfire/widget/top3_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'my_flutter_app_icons.dart';
 
@@ -25,7 +24,7 @@ class _New_TimelineState extends State<New_Timeline> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         fillColor: Colors.black38,
         child: Icon(
-          FontAwesomeIcons.plus,
+          Icons.add,
           color: Colors.white,
         ),
         onPressed: () => Navigator.pushNamed(context, "create_post"),
