@@ -1,4 +1,6 @@
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
+import 'package:bonfire_newbonfire/providers/googleSignIn.dart';
+import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +83,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: OutlineButton(
                     splashColor: Theme.of(context).accentColor,
                     onPressed: () {
-                      //_auth.signUpGoogle();
+                      final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                      provider.googleLogin();
+                      DBService.instance.createUserInDB(provider.user.id, provider.user.displayName, provider.user.email, "", provider.user.photoUrl);
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),

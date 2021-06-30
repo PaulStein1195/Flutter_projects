@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       MaterialPageRoute(
                           builder: (BuildContext context) => SettingsScreen()));
                 },
-                icon: Icon(MyFlutterApp.cog_1, size: 25.0),
+                icon: Icon(MyFlutterApp.settings, size: 25.0),
                 color: Colors.white, //kBottomNavigationBar,
               ),
               SizedBox(
@@ -201,8 +201,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.white70, width: 2.0),
                       borderRadius: BorderRadius.circular(50.0),
+                      image: DecorationImage(
+                        image: NetworkImage(_image)
+                      )
                     ),
-                    child: Center(
+                    /*child: Center(
                       child: Text(
                         _name[0],
                         style: TextStyle(
@@ -210,7 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontSize: 35.0,
                             fontWeight: FontWeight.w700),
                       ),
-                    ),
+                    ),*/
                   ),
                 ),
                 Column(

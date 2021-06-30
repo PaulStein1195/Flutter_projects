@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -315,9 +316,7 @@ class _PostState extends State<Post> {
             var _data = _snapshot.data;
             print(_snapshot.data);
             if (!_snapshot.hasData) {
-              return CircularProgressIndicator(
-                color: Colors.lightBlueAccent,
-              );
+              return SizedBox();
             }
             bool isPostOwner = currentUserId == ownerId;
 
@@ -341,9 +340,8 @@ class _PostState extends State<Post> {
                           var _data = _snapshot.data;
                           print(_snapshot.data);
                           if (!_snapshot.hasData) {
-                            return CircularProgressIndicator(
-                              color: Colors.lightBlueAccent,
-                            );
+                            return SizedBox();
+
                           }
                           bool isPostOwner = _auth.user.uid == ownerId;
                           print(_auth.user.uid);
@@ -356,8 +354,6 @@ class _PostState extends State<Post> {
                                   width: 45,
                                   height: 45,
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white70, width: 2.0),
                                     borderRadius: BorderRadius.circular(50),
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
@@ -487,42 +483,6 @@ class _PostState extends State<Post> {
                                     )
                                   : Text(""));
                         }),
-                    /*Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 12.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                              color: category == "Technology" ? Colors.blue: category == "Nature" ? Colors.green: category == "Health" ? Colors.amber.shade700: category == "Arts" ? Colors.red: Colors.white70,
-                              border: Border.all(color: Color(0XFF333333))
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 2.0,
-                                  bottom: 2.0,
-                                  left: 12.0,
-                                  right: 12.0),
-                              child: Text(
-                                bonfire,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  letterSpacing: 1.0,
-                                  fontSize: 15.5,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey.shade100,
-                                  //    color: Colors.grey.shade100
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),*/
                     Padding(
                       padding: const EdgeInsets.only(left: 7.0),
                       child: Text(
@@ -551,7 +511,7 @@ class _PostState extends State<Post> {
                                   height: 55,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: Colors.grey, width: 1.0),
+                                        color: Colors.grey, width: 0.8),
                                     borderRadius: BorderRadius.circular(6),
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
@@ -572,98 +532,42 @@ class _PostState extends State<Post> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  handleLikePost();
+                                  print("Tapped");
+                                  handleUpgradePost();
                                 },
                                 child: Column(
                                   children: [
                                     /*IconButton(
                                       icon: */
                                     Icon(
-                                      MyFlutterApp.thumbs_up,
+                                      MyFlutterApp.campfire,
                                       size: 28.0,
-                                      color:
-                                          isLiked ? Colors.orange : Colors.grey,
+                                      color: isUpgraded
+                                          ? Colors.orange
+                                          : Colors.grey,
                                     ),
                                     /*onPressed: () {
-                                        handleLikePost();
+                                        print("Tapped");
+                                        handleUpgradePost();
                                       },
                                     ),*/
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "$likesToInt",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: isLiked
-                                            ? Colors.orange
-                                            : Colors.grey.shade200,
-                                      ),
-                                    ),
+                                    SizedBox(height: 5.0),
+                                    Text("$upgradesToInt",
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          color: isUpgraded
+                                              ? Colors.orange
+                                              : Colors.grey.shade200,
+                                        )),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 width: 35.0,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  handleDislikePost();
-                                },
-                                child: Column(
-                                  children: [
-                                    /*IconButton(
-                                      icon: */
-                                    Icon(
-                                      MyFlutterApp.thumbs_down,
-                                      size: 28.0,
-                                      color: Colors.grey,
-                                    ),
-                                    /*onPressed: () {
-                                        handleDislikePost();
-                                      },
-                                    ),*/
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text("$dislikesToInt",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.grey.shade200)),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 2.0),
-                                child: CircularPercentIndicator(
-                                    radius: 75.0,
-                                    lineWidth: 6.5,
-                                    animation: true,
-                                    percent: votePercentage,
-                                    //0.5,
-                                    center: new Text(
-                                      "$votePercentageTextInt %",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 17.5), //"50 %",
-                                    ),
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    progressColor: Colors.orange,
-                                    backgroundColor: Colors.grey.shade100),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
                               GestureDetector(
                                 onTap: () {
                                   _goMsgPage(context,
@@ -709,43 +613,27 @@ class _PostState extends State<Post> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                width: 35.0,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print("Tapped");
-                                  handleUpgradePost();
-                                },
-                                child: Column(
-                                  children: [
-                                    /*IconButton(
-                                      icon: */
-                                    Icon(
-                                      MyFlutterApp.campfire,
-                                      size: 28.0,
-                                      color: isUpgraded
-                                          ? Colors.orange
-                                          : Colors.grey,
-                                    ),
-                                    /*onPressed: () {
-                                        print("Tapped");
-                                        handleUpgradePost();
-                                      },
-                                    ),*/
-                                    SizedBox(height: 5.0),
-                                    Text("$upgradesToInt",
-                                        style: TextStyle(
-                                          fontSize: 18.0,
-                                          color: isUpgraded
-                                              ? Colors.orange
-                                              : Colors.grey.shade200,
-                                        )),
-                                  ],
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 2.0),
+                                child: new LinearPercentIndicator(
+                                  width: 200,
+                                  animation: true,
+                                  lineHeight: 30.0,
+                                  animationDuration: 1000,
+                                  percent: 0.9,
+                                  center: Text("90.0%", style: TextStyle(color: kMainBoxColor, fontWeight: FontWeight.w600),),
+                                  linearStrokeCap: LinearStrokeCap.roundAll,
+                                  progressColor: isUpgraded ? Colors.orange : Colors.white70,
+                                  backgroundColor: Colors.grey,
                                 ),
                               ),
                             ],
                           ),
+
                         ],
                       ),
                     ),
@@ -779,9 +667,9 @@ class _PostState extends State<Post> {
                       child: Text(
                         description,
                         style: TextStyle(
-                            fontSize: 18.5,
-                            color: Colors.grey.shade100,
-                            fontWeight: FontWeight.w300),
+                            fontSize: 17.5,
+                            color: Colors.grey.shade300,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ],

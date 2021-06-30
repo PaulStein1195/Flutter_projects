@@ -4,14 +4,13 @@ import 'package:bonfire_newbonfire/screens/bonfire_event_screen.dart';
 import 'package:flutter/material.dart';
 
 class Trends extends StatelessWidget {
-  String trendImage, title, description, time;
+  String  description, time;
   IconData icon;
   Color iconColor;
   bool isLive;
 
   Trends(
-      {this.trendImage,
-      this.title,
+      {
       this.description,
       this.time,
       this.icon,
@@ -27,7 +26,6 @@ class Trends extends StatelessWidget {
             MaterialPageRoute(
                 builder: (BuildContext context) => BonfireEvent(
                       isLive: this.isLive,
-                      title: this.title,
                       description: this.description,
                       time: this.time,
                       icon: this.icon,
@@ -96,13 +94,6 @@ class Trends extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(
-                              title,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18.5),
-                            ),
                             Text(
                               description,
                               style: TextStyle(

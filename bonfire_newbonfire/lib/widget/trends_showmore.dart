@@ -1,5 +1,5 @@
 import 'package:bonfire_newbonfire/my_flutter_app_icons.dart';
-import 'package:bonfire_newbonfire/test/rtc_room.dart';
+import 'package:bonfire_newbonfire/screens/RTC/rtc_room.dart';
 import 'package:flutter/material.dart';
 
 class Trends_Detailed extends StatelessWidget {

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'model/notifications.dart';
-
+/*
 int notifications_count = 0;
 AuthProvider _auth;
 FirebaseUser user;
@@ -89,15 +89,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                     ],
                                   )
 
-                                  /*Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/Logo.png")
-                          )
-                      ),
-                    ),*/
+
                                 ],
                               ),
                             ),
@@ -127,8 +119,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       }),
     );
   }
-}
-
+}*/
+/*Container(
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/Logo.png")
+                          )
+                      ),
+                    ),*/
 /*
 
 */

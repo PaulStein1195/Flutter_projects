@@ -1,12 +1,13 @@
 import "dart:io";
+import 'package:bonfire_newbonfire/screens/AHome/going.dart';
 import 'package:bonfire_newbonfire/service/cloud_storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
-import 'package:bonfire_newbonfire/screens/Home/display_post_page.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:provider/provider.dart';
+
 
 class EditProfile extends StatefulWidget {
   @override

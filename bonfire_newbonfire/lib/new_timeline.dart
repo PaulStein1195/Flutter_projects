@@ -47,7 +47,7 @@ class _New_TimelineState extends State<New_Timeline> {
                 splashColor: Colors.white70,
                 onPressed: () {},
                 icon: Icon(
-                  MyFlutterApp.inbox,
+                  MyFlutterApp.envelope,
                   size: 27.0,
                 ),
               ),

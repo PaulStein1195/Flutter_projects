@@ -1,7 +1,6 @@
 import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
 import 'package:bonfire_newbonfire/screens/Access/widgets/text_form_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:bonfire_newbonfire/constants.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
 import 'package:bonfire_newbonfire/service/db_service.dart';
 import 'package:bonfire_newbonfire/service/snackbar_service.dart';
@@ -197,7 +196,7 @@ class _Register2ScreenState extends State<Register2Screen> {
           _auth.registerUserWithEmailAndPassword(_email, _password,
                   (String _uid) async {
                 await DBService.instance
-                    .createUserInDB(_uid, _name, _email, "");
+                    .createUserInDB(_uid, _name, _email, "", "");
               });
         }
         //Navigator.pushNamed(context, HomeScreen.id);

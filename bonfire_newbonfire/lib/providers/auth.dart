@@ -19,8 +19,8 @@ enum AuthStatus {
 //Creating a class to host all the AuthProvider functionality
 class AuthProvider extends ChangeNotifier {
 
+
   FirebaseUser user;
-  //final GoogleSignIn _googleSignIn = GoogleSignIn();
   AuthStatus status;
   FirebaseAuth _auth; //Internal variable to call firebase auth
   static AuthProvider instance =
@@ -76,8 +76,6 @@ class AuthProvider extends ChangeNotifier {
 
 
 
-
-
   void registerUserWithEmailAndPassword(String _email, String _password,
       Future<void> onSuccess(String _uid)) async {
     status = AuthStatus.Authenticating;
@@ -103,39 +101,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*void signUpGoogle() async {
-    status = AuthStatus.Authenticating;
-    notifyListeners();
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: [
-        "email",
-        'https://www.googleapis.com/auth/contacts.readonly',
-      ],
-    );
-    User _user = User();
-    print("User detected");
-    try {
-      GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
-      GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-          idToken: _googleAuth.idToken, accessToken: _googleAuth.accessToken);
-      AuthResult _authResult = await _auth.signInWithCredential(credential);
-      print("Result saved");
-      if (_authResult.additionalUserInfo.isNewUser) {
-        _user.uid = _authResult.user.uid;
-        _user.email = _authResult.user.email;
-        _user.name = _authResult.user.displayName;
-        _user.profileImage = _authResult.user.photoUrl;
-        print("User about to be created");
-        DBService.instance.createUserGoogle(_user);
-        status = AuthStatus.Authenticated;
-        NavigationService.instance.navigateToReplacement("email_verification");
-      }
-      notifyListeners();
-    } catch (e) {
-      print("Error from Google $e");
-    }
-  }*/
 
   void logoutUser(Future<void> onSuccess()) async {
     try {

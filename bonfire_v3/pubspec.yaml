@@ -1,0 +1,82 @@
+name: bomfire_v3
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  get:
+  firebase_core: "0.4.4+3"
+  firebase_analytics: "5.0.11"
+  firebase_auth: "0.15.4"
+  firebase_storage: "3.1.1"
+  cloud_firestore: "0.13.4+2"
+  google_sign_in: ^4.4.4
+
+
+  font_awesome_flutter: ^9.1.0
+  shared_preferences: ^2.0.6
+  pinput: ^1.2.0
+  form_field_validator: ^1.1.0
+  loading_overlay: ^0.3.0
+  flutter_launcher_icons: ^0.9.0
+  flutter_speed_dial: ^3.0.5
+  uuid:
+  image_picker:
+  percent_indicator: "^2.1.1"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/fonts/MyFlutterApp.ttf
+
+
+    - family: Palanquin
+      fonts:
+        - asset: assets/fonts/palanquin/palanquin-regular.ttf
+
+
+
+

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../my_flutter_app_icons.dart';
-import '../../sharein_bonfire.dart';
+import 'sharein_bonfire.dart';
 
 class PickActivityScreen extends StatelessWidget {
   @override

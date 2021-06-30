@@ -158,7 +158,7 @@ class _OthersProfileState extends State<OthersProfile> {
                             splashColor: Colors.white70,
                             onPressed: () {},
                             icon: Icon(
-                              MyFlutterApp.mail,
+                              MyFlutterApp.envelope,
                               size: 27.0,
                               color: kTitlesrelevant,
                             ),

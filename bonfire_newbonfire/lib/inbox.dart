@@ -40,7 +40,7 @@ class _InboxScreenState extends State<InboxScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
-                        MyFlutterApp.mail,
+                        MyFlutterApp.envelope,
                         color: Colors.white70,
                         size: 70.0,
                       ),

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a08dc97b-02a3-42ee-85d5-ff219a14a3c4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/create_bonfire.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/RTC/enter_channel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/RTC/id_token.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/RTC/live_rtc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/RTC/live_rtc_1.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/shared/skeleton.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/grid_users.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bitcoin-ticker-flutter" beforeDir="false" afterPath="$PROJECT_DIR$/../bitcoin-ticker-flutter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/assets/fonts/MyFlutterApp.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/assets/fonts/MyFlutterApp.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/assets/images/retouched_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/const/color_pallete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/const/color_pallete.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/constants.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/inbox.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/inbox.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/model/post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/model/post.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/my_flutter_app_icons.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/my_flutter_app_icons.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/new_timeline.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/new_timeline.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/notifications.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/notifications.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/onboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/onboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/register1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/register1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/register2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/register2.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/widgets/amber_btn_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/widgets/amber_btn_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/widgets/text_form_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Access/widgets/text_form_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/BF_Categories/arts.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/BF_Categories/health.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/BF_Categories/nature.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/BF_Categories/select_bonfires_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/BF_Categories/technology.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Community/all_users_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Bonfires/all_users_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Community/bonfire.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Community/new_bonfire(test).dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Bonfires/new_bonfire(test).dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Community/widget/square_bf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/shared/bf_logo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/create_divulgation.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/create_post.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/pick_activity.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/pick_activity.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/WH.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/AHome/WH.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/WH_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/AHome/WH_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/calendar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/AHome/calendar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/display_post_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/going.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/AHome/going.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Home/homepage(test).dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/AHome/homepage(test).dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/edit_profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/edit_profile_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/others_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/others_profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Profile/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/bonfire_event_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/bonfire_event_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/screens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/screens.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/service/db_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/service/db_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/sharein_bonfire.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/Float_btn/sharein_bonfire.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/test/choose_bonfire_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/test/register_screen_noimage.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/test/rtc_room.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/screens/RTC/rtc_room.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/ourTrend.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/ourTrend.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/skeletonHome.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/trends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/trends.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/trends_showmore.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/lib/widget/trends_showmore.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bonfire_newbonfire/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../bonfire_newbonfire/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../clima" beforeDir="false" afterPath="$PROJECT_DIR$/../clima" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1uSy0socfZeHcq9tEdpfEAwpHbC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bonfire_v3" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/model" />
+      <recent name="$PROJECT_DIR$/lib/screens" />
+      <recent name="$PROJECT_DIR$/lib/screens/Bonfire" />
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/lib/services" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/screens/Bonfire" />
+      <recent name="$PROJECT_DIR$/lib/screens/Access" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="bonfire_v3" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="bonfire_v3" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a08dc97b-02a3-42ee-85d5-ff219a14a3c4" name="Default Changelist" comment="" />
+      <created>1624673064622</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624673064622</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2913" y="73" width="876" height="905" key="AVDManager" timestamp="1624761870777">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2913" y="73" width="876" height="905" key="AVDManager/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624761870777" />
+    <state x="2020" y="98" width="1720" height="882" key="AVDManager/69.27.3771.1053@69.27.3771.1053" timestamp="1624676410035" />
+    <state x="576" y="309" width="826" height="486" key="AndroidCreateResourceDirectoryDialog" timestamp="1624739088792">
+      <screen x="69" y="27" width="1851" height="1053" />
+    </state>
+    <state x="576" y="309" width="826" height="486" key="AndroidCreateResourceDirectoryDialog/69.27.1851.1053@69.27.1851.1053" timestamp="1624739088792" />
+    <state x="3240" y="276" width="426" height="486" key="FileChooserDialogImpl" timestamp="1624897945306">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3240" y="276" width="426" height="486" key="FileChooserDialogImpl/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624897945306" />
+    <state x="1342" y="296" width="351" height="486" key="FileChooserDialogImpl/69.27.1851.1053@69.27.1851.1053" timestamp="1624739180362" />
+    <state x="2662" y="296" width="426" height="486" key="FileChooserDialogImpl/69.27.3771.1053@69.27.3771.1053" timestamp="1624673101146" />
+    <state width="1874" height="2" key="GridCell.Tab.0.bottom" timestamp="1624891669711">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="2" key="GridCell.Tab.0.bottom/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624891669711" />
+    <state width="1805" height="149" key="GridCell.Tab.0.bottom/69.27.1851.1053@69.27.1851.1053" timestamp="1624740326062" />
+    <state width="1874" height="416" key="GridCell.Tab.0.bottom/69.27.3771.1053@69.27.3771.1053" timestamp="1624676465334" />
+    <state width="1874" height="2" key="GridCell.Tab.0.center" timestamp="1624891669710">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="2" key="GridCell.Tab.0.center/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624891669710" />
+    <state width="1805" height="149" key="GridCell.Tab.0.center/69.27.1851.1053@69.27.1851.1053" timestamp="1624740326062" />
+    <state width="1874" height="416" key="GridCell.Tab.0.center/69.27.3771.1053@69.27.3771.1053" timestamp="1624676465334" />
+    <state width="1874" height="2" key="GridCell.Tab.0.left" timestamp="1624891669710">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="2" key="GridCell.Tab.0.left/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624891669710" />
+    <state width="1805" height="149" key="GridCell.Tab.0.left/69.27.1851.1053@69.27.1851.1053" timestamp="1624740326062" />
+    <state width="1874" height="416" key="GridCell.Tab.0.left/69.27.3771.1053@69.27.3771.1053" timestamp="1624676465334" />
+    <state width="1874" height="2" key="GridCell.Tab.0.right" timestamp="1624891669710">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="2" key="GridCell.Tab.0.right/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624891669710" />
+    <state width="1805" height="149" key="GridCell.Tab.0.right/69.27.1851.1053@69.27.1851.1053" timestamp="1624740326062" />
+    <state width="1874" height="416" key="GridCell.Tab.0.right/69.27.3771.1053@69.27.3771.1053" timestamp="1624676465334" />
+    <state x="2375" y="174" key="SettingsEditor" timestamp="1624897108804">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2375" y="174" key="SettingsEditor/69.27.1851.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1624897108804" />
+  </component>
+</project>

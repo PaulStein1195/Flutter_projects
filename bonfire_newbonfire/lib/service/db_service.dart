@@ -1,9 +1,9 @@
 import 'package:bonfire_newbonfire/model/bonfire.dart';
 import 'package:bonfire_newbonfire/model/comment.dart';
 import 'package:bonfire_newbonfire/model/notifications.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bonfire_newbonfire/model/user.dart';
 import 'package:bonfire_newbonfire/model/post.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -82,7 +82,7 @@ class DBService {
   }
 
   Future<void> createUserInDB(
-      String _uid, String _name, String _email, String _bio) async {
+      String _uid, String _name, String _email, String _bio, String _profileImage) async {
     try {
       return await _db.collection(_userCollection).document(_uid).setData({
         "name": _name,

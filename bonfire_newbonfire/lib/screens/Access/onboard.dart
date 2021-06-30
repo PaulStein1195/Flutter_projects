@@ -1,5 +1,5 @@
+import 'package:bonfire_newbonfire/home.dart';
 import 'package:bonfire_newbonfire/screens/Access/widgets/amber_btn_widget.dart';
-import 'package:bonfire_newbonfire/screens/BF_Categories/select_bonfires_screen.dart';
 import 'package:flutter/material.dart';
 
 class Onboard1 extends StatelessWidget {
@@ -35,7 +35,7 @@ class Onboard1 extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => SelectBonfireScreen(),
+                          builder: (BuildContext context) => HomeScreen(),
                         ),
                       );
                     },
@@ -83,7 +83,7 @@ class Join_First_BF extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => SelectBonfireScreen(),
+                          builder: (BuildContext context) => HomeScreen(),
                         ),
                       );
                     },

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/service/snackbar_service.dart';
 import '../../providers/auth.dart';
 import 'package:provider/provider.dart';
-import '../../constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -33,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kMainBoxColor,
       resizeToAvoidBottomInset: false,
       appBar: kAppbar(context),
       body: Padding(

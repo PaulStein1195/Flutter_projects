@@ -1,8 +1,8 @@
+// @dart=2.9
+
 import 'package:bonfire_newbonfire/const/color_pallete.dart';
 import 'package:bonfire_newbonfire/providers/auth.dart';
-import 'package:bonfire_newbonfire/screens/Float_btn/create_post.dart';
-import 'package:bonfire_newbonfire/screens/Home/calendar.dart';
-import 'package:bonfire_newbonfire/screens/Home/homepage(test).dart';
+
 import 'package:flutter/material.dart';
 import 'package:bonfire_newbonfire/service/navigation_service.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +15,8 @@ void main() {
     statusBarColor: Colors.black87, // status bar color
     statusBarIconBrightness: Brightness.light,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -27,15 +29,19 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: NavigationService.instance.navigatorKey,
         theme: ThemeData(
-            brightness: Brightness.dark,
-            primaryColor: Color(0XFF333333),
-            accentColor: Color(0XFFffb21a),
-            scaffoldBackgroundColor: kFirstBackgroundColor,
-            // Color(0XFF232020),//Color.fromRGBO(41, 39, 40, 180.0),
-            fontFamily: "Palanquin",
-            textTheme: TextTheme(
-                //headline1: TextStyle()
-                )),
+          brightness: Brightness.dark,
+
+          scaffoldBackgroundColor: kFirstBackgroundColor,
+          // Color(0XFF232020),//Color.fromRGBO(41, 39, 40, 180.0),
+          primaryColorDark: Colors.grey.shade900,
+          //Color.fromRGBO(41, 39, 40, 150.0),
+          primaryColorLight: Color(0XFFf2f2f7),
+          buttonColor: Colors.orange,
+          primaryColor: Color(0XFF333333),
+          accentColor: Color(0XFFffb21a),
+          dividerColor: Colors.orange,
+          fontFamily: "Palanquin",
+        ),
         initialRoute: "splash",
         routes: {
           "splash": (BuildContext _context) => SplashScreen(),
@@ -49,7 +55,6 @@ class MyApp extends StatelessWidget {
           "calendar": (BuildContext _context) => CalendarScreen(),
           "profile": (BuildContext _context) => ProfileScreen(),
           "edit_profile": (BuildContext _context) => EditProfile(),
-          "create_post": (BuildContext _context) => CreatePostScreen(),
           "select_type_post": (BuildContext _context) => PickActivityScreen(),
           "guide": (BuildContext _context) => Onboard1(),
         },
